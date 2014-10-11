@@ -3,7 +3,7 @@
     Created on : 09/10/2014, 17:49:02
     Author     : Peri
 --%>
-<%@page import="Exceptions.NoException"%>
+<%@page import="Exceptions.*"%>
 <%@page import="Modelo.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Bootstrap core CSS -->
@@ -24,7 +24,7 @@
         rd.include(request, response);
 
     } else {
-        throw new NoException("No logueado.");
+        throw new loginException();
     }
 
 %>

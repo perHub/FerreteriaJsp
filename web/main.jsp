@@ -9,7 +9,7 @@
 <%@page import="java.util.Map"%>
 <%@page import="Controladora.CProducto"%>
 <%@page import="Modelo.*"%>
-<%@page import="Exceptions.NoException"%>
+<%@page import="Exceptions.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page errorPage="proc/error.jsp" %>
 
@@ -21,7 +21,7 @@
 
 <%
     if (usuario.getClass() != Administrador.class && usuario.getClass() != Cliente.class) {
-        throw new NoException("No está logueado.");
+        throw new loginException();
     }
 
     CProducto cProd = new CProducto();

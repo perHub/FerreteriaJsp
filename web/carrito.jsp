@@ -11,11 +11,11 @@
 <jsp:useBean id="carrito" class="Modelo.Compra" scope="session"/>
 
 <%
-    if (usuario.getClass() != Cliente.class) {
+    if (usuario.getClass() == Administrador.class) {
                 throw new AdminClienteException(false);
             }
-    else if(usuario.getClass() != Administrador.class){
-        throw new NoException("No logueado.");
+    else if(usuario.getClass() != Cliente.class){
+        throw new loginException();
     }
     
     if(carrito.getDetalles().isEmpty()){
