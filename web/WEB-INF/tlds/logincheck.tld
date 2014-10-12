@@ -5,7 +5,11 @@
     <uri>/WEB-INF/tlds/logincheck</uri>
     <tag>
         <name>logchk</name>
-        <tag-class>Servlets.Procesan.LoginCheck</tag-class>
+        <tag-class>Tags.LoginCheck</tag-class>
         <body-content>empty</body-content>
+        <attribute>
+            <name>admin</name>
+            <type>java.util.Boolean</type>
+        </attribute>
     </tag>
 </taglib>

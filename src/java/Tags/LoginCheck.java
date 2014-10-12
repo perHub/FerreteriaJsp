@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlets.Procesan;
+package Tags;
 
 import Exceptions.AdminClienteException;
-import Modelo.*;
+import Exceptions.loginException;
+import Modelo.Administrador;
+import Modelo.Cliente;
+import Modelo.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.jsp.JspWriter;
@@ -19,33 +22,42 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  *
  * @author Dev
  */
-public class UsuarioCheck extends SimpleTagSupport {
+public class LoginCheck extends SimpleTagSupport {
 
     private boolean admin;
+    private boolean isPresent;
 
-    /**
-     * Called by the container to invoke this tag. The implementation of this
-     * method is provided by the tag library developer, and handles all tag
-     * processing, body iteration, etc.
-     */
     @Override
     public void doTag() throws JspException {
 
         try {
             Usuario usr = (Usuario) getJspContext().getAttribute("usuario", PageContext.SESSION_SCOPE);
-            if ( admin && usr.getClass() == Cliente.class) {
-                throw new AdminClienteException();
+            if (usr == null) {
+                throw new loginException();
+            } else if (!usr.isActivo()) {
+
+                throw new JspException("Usuario inactivo.");
             }
-            else if(!admin && usr.getClass() == Administrador.class)
-                throw new AdminClienteException();
+
+            if (isPresent) {
+                if (admin && usr.getClass() == Cliente.class) {
+                    throw new AdminClienteException();
+                } else if (!admin && usr.getClass() == Administrador.class) {
+                    throw new AdminClienteException();
+                }
+            }
+
+        } catch (loginException ex) {
+            getJspContext().setAttribute("error", ex.getMessage());
+            throw new JspException(ex.getMessage());
         } catch (AdminClienteException ex) {
             throw new JspException(ex.getMessage());
         }
     }
 
     public void setAdmin(boolean admin) {
+        isPresent = true;
         this.admin = admin;
     }
 
 }
-

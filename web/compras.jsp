@@ -69,12 +69,12 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${compras}" var="c">
-                    <form id="comp" action="DetallesDeCompra" method="post">
+                    <form id="comp" action="detalles_de_compra.jsp" method="post">
                         <tr>
                             <td>${c.fecha}</td>
                             <td><button type="submit" class="button">$${c.total}</button></td>
                         </tr>
-                        <input name="compId" type="hidden" value="${c.id}" />
+                        <input name="id" type="hidden" value="${c.id}" />
                     </form>
                 </c:forEach>
                 </tbody>

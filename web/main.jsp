@@ -54,7 +54,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 319px">Precio:</td>
-                                <td>$ <c:out value="${prod.precio}"/></td>
+                                <td>$<c:out value="${prod.precio}"/></td>
                             </tr>
                             <tr>
                                 <td style="width: 319px">Stock:</td>

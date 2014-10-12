@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlets.Procesan;
+package Tags;
 
-import Exceptions.loginException;
-import Modelo.Usuario;
+import Exceptions.AdminClienteException;
+import Modelo.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.jsp.JspWriter;
@@ -19,28 +19,37 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  *
  * @author Dev
  */
-public class LoginCheck extends SimpleTagSupport {
+public class UsuarioCheck extends SimpleTagSupport {
 
+    private boolean admin;
+    private boolean isPresent;
     /**
      * Called by the container to invoke this tag. The implementation of this
      * method is provided by the tag library developer, and handles all tag
      * processing, body iteration, etc.
-     * @throws javax.servlet.jsp.JspException
      */
     @Override
     public void doTag() throws JspException {
+        
 
         try {
             Usuario usr = (Usuario) getJspContext().getAttribute("usuario", PageContext.SESSION_SCOPE);
-            if (usr == null) {
-                throw new loginException();
-
+            if ( admin && usr.getClass() == Cliente.class) {
+                throw new AdminClienteException();
             }
-
-        } catch (loginException ex) {
-            getJspContext().setAttribute("error", ex.getMessage());
+            else if(!admin && usr.getClass() == Administrador.class)
+                throw new AdminClienteException();
+            
+            
+        } catch (AdminClienteException ex) {
             throw new JspException(ex.getMessage());
         }
     }
 
+    public void setAdmin(boolean admin) {
+        isPresent = true;
+        this.admin = admin;
+    }
+
 }
+
