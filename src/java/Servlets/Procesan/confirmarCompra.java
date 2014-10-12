@@ -10,7 +10,6 @@ import Controladora.CUsuario;
 import Modelo.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,13 +67,8 @@ public class confirmarCompra extends HttpServlet {
             
             session.setAttribute("carrito", null);
             
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("</head>");
-            out.println("<body onload=window.close()>");
-            out.println("</body>");
-            out.println("</html>");
+            response.sendRedirect("main.jsp");
+
         } catch (NullPointerException ex) {
             if (cl == null) {
                 response.sendRedirect("No.html");

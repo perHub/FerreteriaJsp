@@ -80,7 +80,14 @@ public class Compra implements Serializable {
 
     public void agregarDetalle(Detalle d) {     //Los métodos agregar y eliminar detalle sólo deben ser utilizados para objetos creados directamente en memoria y no para aquellos creados por hibernate.
         this.total = total + d.getPrecio();
-        detalles.add(d);
+        Detalle detActual;
+        
+        if ((detActual = findByNombre(d.getProducto().getNombre())) != null) { //Sumo los precios y cantidades, no agrego el objeto.
+            detActual.setPrecio(detActual.getPrecio() + d.getPrecio());
+            detActual.setCantidad(detActual.getCantidad() + d.getCantidad());
+        }
+        else
+            detalles.add(d);         
     }
 
     @SuppressWarnings("null")
@@ -94,14 +101,26 @@ public class Compra implements Serializable {
                 }
             }
 
-            if((this.total = total - d.getPrecio()) <= 0)
+            if ((this.total = total - d.getPrecio()) <= 0) {
                 this.total = 0;
-            
+            }
+
             d.devolverProducto();
             detalles.remove(d);
         } catch (NullPointerException ex) {
             throw new NotFoundException("No se ha encontrado el detalle de compra.");
         }
+    }
+
+    public Detalle findByNombre(String nombre) {
+        
+        for (Detalle d : detalles) {
+            if (d.getProducto().getNombre().equals(nombre)) {
+                return d;
+            }
+        }
+
+        return null;
     }
 
 }

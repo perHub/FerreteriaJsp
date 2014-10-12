@@ -13,15 +13,14 @@ import javax.persistence.*;
  */
 public class DaoHelper {
 
-    private static EntityManagerFactory emf;
-    private static EntityManager em;
+    private static final EntityManagerFactory emf;
+    private static final EntityManager em;
 
     static {
-        if(emf == null)
-            emf = Persistence.createEntityManagerFactory("FerreteriaServletsPU");
-        
-        if(em == null)
-            em = emf.createEntityManager();
+
+        emf = Persistence.createEntityManagerFactory("FerreteriaServletsPU");
+
+        em = emf.createEntityManager();
 
     }
 

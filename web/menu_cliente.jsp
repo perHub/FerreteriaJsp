@@ -14,7 +14,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Ferretería</a>
+            <a class="navbar-brand" href="main.jsp">Ferretería</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -23,17 +23,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Compras <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="admin_usuarios.jsp">Mis compras</a></li>
+                        <li><a href="compras.jsp">Mis compras</a></li>
                     </ul>
-                </li>
-                
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar productos <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="admin_productos.jsp">Ver productos</a></li>
-                        <li><a href="alta_producto.jsp">Nuevo producto</a></li>
-                    </ul>
-                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="carrito.jsp">Ver carrito</a></li>

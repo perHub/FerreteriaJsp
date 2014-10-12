@@ -46,7 +46,7 @@ public class eliminarCarrito extends HttpServlet {
             }
 
             Compra c = (Compra) session.getAttribute("carrito");
-            int detId = Integer.parseInt(request.getParameter("detId").toString());
+            int detId = Integer.parseInt(request.getParameter("detId"));
 
             c.eliminarDetalle(detId);
 
@@ -54,7 +54,7 @@ public class eliminarCarrito extends HttpServlet {
                 session.setAttribute("carrito", null);
             }
 
-            response.sendRedirect("Carrito");
+            response.sendRedirect("carrito.jsp");
         } catch (NullPointerException | NotFoundException ex) {
             Logger.getLogger(eliminarCarrito.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoException ex) {

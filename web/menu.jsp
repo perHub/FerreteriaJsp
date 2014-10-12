@@ -17,11 +17,13 @@
     Usuario usr = (Usuario)session.getAttribute("usuario");
     
     if (usr.getClass() == Administrador.class) {
-        RequestDispatcher rd = request.getRequestDispatcher("menu_admin.jsp");
-        rd.include(request, response);
+        %>
+        <%@ include file="menu_admin.jsp"%> 
+        <%
     } else if (usr.getClass() == Cliente.class) {
-        RequestDispatcher rd = request.getRequestDispatcher("menu_cliente.jsp");
-        rd.include(request, response);
+        %>
+        <%@ include file="menu_cliente.jsp"%>
+        <%
 
     } else {
         throw new loginException();

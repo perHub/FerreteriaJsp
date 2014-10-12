@@ -15,9 +15,13 @@ public class AdminClienteException extends Exception { //Con esta excepción det
     private boolean admin;
     
     public AdminClienteException(boolean admin){
+       super("Imposible realizar esta solicitud para el usuario logueado.");
         this.admin = admin;
     }
-
+    
+    public AdminClienteException(){
+       super("Imposible realizar esta solicitud para el usuario logueado.");
+    }
     public boolean isAdmin() {
         return admin;
     }
