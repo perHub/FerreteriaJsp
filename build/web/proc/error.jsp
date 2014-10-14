@@ -1,8 +1,3 @@
-<%-- 
-    Document   : error
-    Created on : 02/10/2014, 20:55:26
-    Author     : Peri
---%>
 <%@ page isErrorPage="true" contentType="text/html" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,6 +7,17 @@
         <title>Error</title>
     </head>
     <body>
-        <h1> <%=exception.getMessage() %></h1>
+        <h1> 
+            <% 
+                String msg;
+                if (exception.getMessage() == null) {
+                   msg = (String)session.getAttribute("error");
+                }
+                else{
+                    msg = exception.getMessage();
+                }
+            %>
+            <%=msg%>
+        </h1>
     </body>
 </html>
