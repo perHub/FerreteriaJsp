@@ -37,15 +37,7 @@
                     <label>Stock</label>
                     <input type="number" name="stock" value="<c:if test="${producto.stock != 0}">${producto.stock}</c:if>" min="1" class="span3" required>
                     <br>
-                    <label><input type="checkbox" name="activo"  checked="
-                        <c:choose>
-                            <c:when test="${producto.id != 0 && !producto.activo}">
-                                false
-                            </c:when>
-                            <c:otherwise>
-                                true
-                            </c:otherwise>
-                        </c:choose>"> Disponible</label>
+                    <label><input type="checkbox" name="activo" <c:if test="${producto.id == 0 || (producto.activo && producto.id != 0)}">checked</c:if>> Disponible</label>
                 <br>
                 <input type="submit" value="Actualizar" class="btn btn-primary pull-right">
             </form>
