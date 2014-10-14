@@ -12,7 +12,8 @@
 <%@page import="Exceptions.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page errorPage="proc/error.jsp" %>
-
+<%@taglib prefix="lg" uri="/WEB-INF/tlds/logincheck.tld"%>
+<lg:logchk/>
 <jsp:useBean id="usuario" class="Modelo.Usuario" scope="session"/>
 
 <%! 
@@ -20,12 +21,8 @@
 %>
 
 <%
-    if (usuario.getClass() != Administrador.class && usuario.getClass() != Cliente.class) {
-        throw new loginException();
-    }
-
     CProducto cProd = new CProducto();
-    lstProd = cProd.getAll();
+    lstProd = cProd.getAllActivated();
     
     pageContext.setAttribute("lstProd", lstProd, PageContext.PAGE_SCOPE);
     session.setAttribute("productos", lstProd);

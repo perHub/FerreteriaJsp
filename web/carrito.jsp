@@ -8,6 +8,8 @@
 <%@page import="Exceptions.*"%>
 <%@page import="Modelo.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="lg" uri="/WEB-INF/tlds/logincheck.tld"%>
+<lg:logchk/>
 <jsp:useBean id="usuario" class="Modelo.Usuario" scope="session"/>
 <jsp:useBean id="carrito" class="Modelo.Compra" scope="session"/>
 

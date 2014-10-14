@@ -23,6 +23,9 @@ public class CProducto {
     public List<Producto> getAll(){
         return dProd.getAll();
     }
+    public List<Producto> getAllActivated(){
+        return dProd.getAllActivated();
+    }
     public Map<Integer, Producto> getAllMap(){
         return dProd.getAllMap();
     }

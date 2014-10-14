@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package DAO;
 
 import Modelo.Producto;
+import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -14,7 +16,11 @@ import Modelo.Producto;
  */
 public class DAOProducto extends GenericDaoJpaImpl<Producto, Integer> {
 
+    public List getAllActivated() {
+        Session session = em.unwrap(Session.class);
+        return session.createCriteria(entityClass)
+                .add(Restrictions.eq("activo", true))
+                 .list();
+    }
 
-    
-    
 }

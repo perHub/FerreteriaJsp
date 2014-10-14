@@ -14,13 +14,13 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "productos")
-public class Producto implements Serializable{
+public class Producto implements Serializable {
 
     private int id;
     private String nombre;
     private float precio;
     private int stock;
-
+    private boolean activo;
 
     public Producto() {
     }
@@ -73,5 +73,13 @@ public class Producto implements Serializable{
         this.stock = stock;
     }
 
+    @Column(name = "activo")
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
 
 }
