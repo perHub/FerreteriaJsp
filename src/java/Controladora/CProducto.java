@@ -8,7 +8,6 @@ package Controladora;
 
 import DAO.DAOProducto;
 import Modelo.Producto;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +19,12 @@ public class CProducto {
     
     DAOProducto dProd = new DAOProducto();
     
+    public void create (Producto p){
+        dProd.create(p);
+    }
+    public void update(Producto p){
+        dProd.update(p);
+    }
     public List<Producto> getAll(){
         return dProd.getAll();
     }
