@@ -56,7 +56,7 @@
                     <input type="hidden" name="precio" value="<c:out value="${prod.precio}"/>"/>
                     <input type="hidden" name="stock" value="<c:out value="${prod.stock}"/>"/>
                     <input type="hidden" name="activo" value="<c:out value="${prod.activo}"/>"/>
-
+                    
                     <div style="margin: auto; position:relative; width: 10%;">
                         <input name="Button1" type="submit" value="Editar" />&nbsp;
                     </div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 14, 2014 at 05:28 AM
+-- Generation Time: Oct 15, 2014 at 02:59 AM
 -- Server version: 5.5.39
 -- PHP Version: 5.4.33
 
@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `ferreteria`
 --
+DROP DATABASE `ferreteria`;
 CREATE DATABASE IF NOT EXISTS `ferreteria` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `ferreteria`;
 
@@ -28,7 +29,6 @@ USE `ferreteria`;
 -- Table structure for table `compras`
 --
 
-DROP TABLE IF EXISTS `compras`;
 CREATE TABLE `compras` (
 `id` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
@@ -60,7 +60,6 @@ INSERT INTO `compras` (`id`, `fecha`, `total`) VALUES
 -- Table structure for table `compras_detalles`
 --
 
-DROP TABLE IF EXISTS `compras_detalles`;
 CREATE TABLE `compras_detalles` (
   `compras_id` int(11) NOT NULL,
   `detalles_id` int(11) NOT NULL
@@ -110,7 +109,6 @@ INSERT INTO `compras_detalles` (`compras_id`, `detalles_id`) VALUES
 -- Table structure for table `detalles`
 --
 
-DROP TABLE IF EXISTS `detalles`;
 CREATE TABLE `detalles` (
 `id` int(11) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
@@ -162,14 +160,13 @@ INSERT INTO `detalles` (`id`, `cantidad`, `precio`, `producto_id`) VALUES
 -- Table structure for table `productos`
 --
 
-DROP TABLE IF EXISTS `productos`;
 CREATE TABLE `productos` (
 `id` int(11) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `precio` float DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
   `activo` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `productos`
@@ -183,7 +180,8 @@ INSERT INTO `productos` (`id`, `nombre`, `precio`, `stock`, `activo`) VALUES
 (5, 'Pinza', 60, 47, 1),
 (6, 'Destornillador philips', 10, 97, 1),
 (7, 'Destornillador plano', 10, 98, 1),
-(8, 'Tenaza', 30, 48, 1);
+(8, 'Tenaza', 30, 48, 1),
+(9, 'Sargento', 200, 100, 0);
 
 -- --------------------------------------------------------
 
@@ -191,7 +189,6 @@ INSERT INTO `productos` (`id`, `nombre`, `precio`, `stock`, `activo`) VALUES
 -- Table structure for table `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `tipousr` varchar(31) NOT NULL,
 `id` int(11) NOT NULL,
@@ -220,7 +217,6 @@ INSERT INTO `usuarios` (`tipousr`, `id`, `activo`, `apellido`, `nombre`, `passwo
 -- Table structure for table `usuarios_compras`
 --
 
-DROP TABLE IF EXISTS `usuarios_compras`;
 CREATE TABLE `usuarios_compras` (
   `usuarios_id` int(11) NOT NULL,
   `compras_id` int(11) NOT NULL
@@ -298,7 +294,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 -- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --

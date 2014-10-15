@@ -32,7 +32,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar productos <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="admin_productos.jsp">Ver productos</a></li>
-                        <li><a href="alta_producto.jsp">Nuevo producto</a></li>
+                        <li><a href="info_producto.jsp">Nuevo producto</a></li>
                     </ul>
                 </li>
             </ul>

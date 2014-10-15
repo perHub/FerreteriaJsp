@@ -10,16 +10,17 @@
 <lg:logchk admin="true"/>
 <jsp:useBean id="producto" class="Modelo.Producto" scope="request"/>
 <jsp:setProperty name="producto" property="*"/>
-<jsp:useBean id="nuevo" class="java.lang.Boolean" scope="request"/>
+<jsp:useBean id="nuevo" class="oracle.jsp.jml.JmlBoolean" scope="request"/>
 <%@ page errorPage="proc/error.jsp" %>
 
 <%
     CProducto cProd = new CProducto();
-    if (nuevo){
+    if (nuevo.getValue()){
         cProd.create(producto);
     }
     else{
         cProd.update(producto);
     }
     
+    response.sendRedirect("../admin_productos.jsp");
 %>
