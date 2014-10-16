@@ -11,18 +11,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page errorPage="proc/error.jsp" %>
 <%@taglib prefix="lg" uri="/WEB-INF/tlds/logincheck.tld"%>
-<lg:logchk/>
+<lg:logchk admin="false"/>
 <jsp:useBean id="usuario" class="Modelo.Usuario" scope="session"/>
 <jsp:useBean id="usrCompras" class="Modelo.Cliente" scope="page"/>
 <jsp:setProperty name="usrCompras" property="id"/>
 
 <%
-    if (usuario.getClass() == Administrador.class) {
-        throw new ServletException("No aplicable.");
-    } else if (usuario.getClass() != Cliente.class) {
-        throw new loginException();
-    }
-
     CCompra cc = new CCompra();
     List<Compra> compras;
     

@@ -58,7 +58,7 @@
                                 <td><c:out value="${prod.stock}"/></td>
                             </tr>
                         </table>
-                        <div class="auto-style1" style="width: 322px; height: 27px">Cantidad: <input type="number" name="cantidad" value="1" min="1" max="<c:out value="${prod.stock}"/>" style="width: 50px">
+                        <div class="auto-style1" style="width: 322px; height: 27px">Cantidad: <input type="number" name="cantidad"  required value="1" min="1" max="<c:out value="${prod.stock}"/>" style="width: 50px">
                             <input type="hidden" name="prodId" value="<c:out value="${prod.id}"/>"/>
                             <input name="Button1" type="submit" value="Agregar al carrito" />&nbsp;
                             <br />
