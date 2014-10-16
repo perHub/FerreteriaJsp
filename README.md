@@ -1,6 +1,1 @@
-- [ ] Manejar concurrencia
-- [ ] Form de alta de usuario, y la posibilidad de ver sus compras históricas
-- [ ] Agregar campo "estado" en la clase Compra
-- [ ] Agregar nueva clase "Pedido" que tendrá una lista de compras
-- [ ] Dar la posibilidad al admin que revise los pedidos pendientes y pueda seleccionarlos
-- [ ] Realizar la orden de pickeo y factura
+https://gist.github.com/perHub/c222f8994959ee19791b
