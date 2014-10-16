@@ -45,3 +45,4 @@ nbbuild/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+src/conf/persistence.xml
