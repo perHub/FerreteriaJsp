@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Controladora;
 
 import DAO.DAOCompra;
@@ -16,14 +15,23 @@ import java.util.List;
  * @author Peri
  */
 public class CCompra {
+
     DAOCompra dC = new DAOCompra();
-    
-    public List<Compra> getAllByUserId(int id){
+
+    public List<Compra> getPendientes() {
+        return dC.getPendientes();
+    }
+
+    public List<Compra> getProcesados() {
+        return dC.getProcesados();
+    }
+
+    public List<Compra> getAllByUserId(int id) {
         return dC.getAllbyUsrId(id);
     }
-    
-    public List<Detalle> getDetalles(int id){
+
+    public List<Detalle> getDetalles(int id) {
         return dC.getDetalles(id);
     }
-    
+
 }

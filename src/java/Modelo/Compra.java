@@ -25,6 +25,7 @@ public class Compra implements Serializable {
     private Set<Detalle> detalles = new HashSet<>();
     private float total = 0;
     private Date fecha;
+    private Boolean procesado;
 
     public Compra() {
     }
@@ -121,6 +122,15 @@ public class Compra implements Serializable {
         }
 
         return null;
+    }
+
+    @Column(name = "procesado")
+    public Boolean getProcesado() {
+        return procesado;
+    }
+
+    public void setProcesado(Boolean procesado) {
+        this.procesado = procesado;
     }
 
 }

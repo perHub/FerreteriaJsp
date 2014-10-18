@@ -29,6 +29,7 @@ public  class Usuario {
     protected String password;
     protected String nombre;
     protected String apellido;
+    private String email;
     private Boolean activo;
     
     public Usuario(){
@@ -115,6 +116,15 @@ public  class Usuario {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+    
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
   

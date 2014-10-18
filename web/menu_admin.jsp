@@ -14,7 +14,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Ferretería</a>
+            <a class="navbar-brand" href="admin_usuarios.jsp">Ferretería</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -35,6 +35,15 @@
                         <li><a href="info_producto.jsp">Nuevo producto</a></li>
                     </ul>
                 </li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar pedidos<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="pedidos_pendientes.jsp">Ver compras pendientes</a></li>
+                        <li><a href="pedidos_procesados.jsp">Ver pedidos procesados</a></li>
+                    </ul>
+                </li>
+                
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

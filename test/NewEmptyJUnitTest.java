@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import DAO.DAOProducto;
-import Modelo.Producto;
+import DAO.*;
+import Modelo.*;
+import java.util.Date;
 import java.util.Map;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -43,10 +45,30 @@ public class NewEmptyJUnitTest {
     //
     @Test
      public void hello() {
+         PropertyConfigurator.configure("log4j.properties");
          DAOProducto dProd = new DAOProducto();
+         DAOCompra dComp = new DAOCompra();
+         DAOPedido dPedido = new DAOPedido();
          
-         Map lol = dProd.getAllMap();
-         Producto p = (Producto)lol.get(2);
+         
+         
+         Compra c1 = dComp.read(1);
+         Compra c2 = dComp.read(4);
+         Compra c3 = dComp.read(5);
+         
+         Pedido p = dPedido.read(1);
+         
+         Map<String, Integer> p1 = p.obtenerProductos();
+         
+//         p.setFecha(new Date());
+//         
+//         p.agregarCompra(c1);
+//         p.agregarCompra(c1);
+//         p.agregarCompra(c3);
+         
+//         dPedido.create(p);
+         
+         
          System.out.println("fu");
      }
 }

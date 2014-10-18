@@ -9,12 +9,28 @@ package DAO;
 import Modelo.Compra;
 import Modelo.Detalle;
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Peri
  */
 public class DAOCompra extends GenericDaoJpaImpl<Compra, Integer> {
+    
+    public List<Compra> getPendientes(){
+        Session session = em.unwrap(Session.class);
+        return session.createCriteria(entityClass)
+                .add(Restrictions.eq("procesado", 0))
+                 .list();
+    }
+    
+    public List<Compra> getProcesados(){
+        Session session = em.unwrap(Session.class);
+        return session.createCriteria(entityClass)
+                .add(Restrictions.eq("procesado", 1))
+                 .list();
+    }
     
     public List<Compra> getAllbyUsrId(int id){
         return em.createNativeQuery("select c.id,c.fecha, c.total from ferreteria.compras c JOIN usuarios_compras uc ON c.id=uc.compras_id WHERE uc.usuarios_id="+ id, entityClass)
