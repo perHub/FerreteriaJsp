@@ -18,6 +18,9 @@ public class CCompra {
 
     DAOCompra dC = new DAOCompra();
 
+    public List<Compra> getAll() {
+        return dC.getAll();
+    }
     public List<Compra> getPendientes() {
         return dC.getPendientes();
     }

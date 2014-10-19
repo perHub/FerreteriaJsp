@@ -9,17 +9,11 @@
 <%@page import="Modelo.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="lg" uri="/WEB-INF/tlds/logincheck.tld"%>
-<lg:logchk/>
+<lg:logchk admin="false"/>
 <jsp:useBean id="usuario" class="Modelo.Usuario" scope="session"/>
 <jsp:useBean id="carrito" class="Modelo.Compra" scope="session"/>
 
 <%
-    if (usuario.getClass() == Administrador.class) {
-        throw new AdminClienteException(false);
-    } else if (usuario.getClass() != Cliente.class) {
-        throw new loginException();
-    }
-
     if (carrito.getDetalles().isEmpty()) {
         throw new NoException("Carrito vacío!");
     }

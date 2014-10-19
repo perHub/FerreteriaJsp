@@ -57,12 +57,6 @@ public  class Usuario {
         
     }
     
-
-//    public Usuario(int id, String username, String password, String nombre, String apellido) {
-//        this(username, password, nombre, apellido);
-//        this.id = id;
-//    }
-
     @Id
     @GeneratedValue
     public int getId() {

@@ -28,10 +28,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Detalles de compra</title>
         <%@ include file="menu.jsp"%> 
+        <script>
+            function goBack() {
+                window.history.back()
+            }
+        </script>
     </head>
     <body>
         <div style="width: 321px; margin-left: auto; margin-right: auto;">
-            <a  href="compras.jsp"> Ir a compras</a>
+            <button onclick="goBack()">Ir a compras</button>
         </div>
         <br>
         <c:forEach items="${detalles}" var="d">

@@ -44,21 +44,22 @@ public class NewEmptyJUnitTest {
     // The methods must be annotated with annotation @Test. For example:
     //
     @Test
-     public void hello() {
+     public void hello() throws CantidadInsuficienteException {
          PropertyConfigurator.configure("log4j.properties");
          DAOProducto dProd = new DAOProducto();
          DAOCompra dComp = new DAOCompra();
          DAOPedido dPedido = new DAOPedido();
          
-         
-         
-         Compra c1 = dComp.read(1);
-         Compra c2 = dComp.read(4);
-         Compra c3 = dComp.read(5);
+
+;         
+//         Compra c1 = dComp.read(1);
+//         Compra c2 = dComp.read(4);
+//         Compra c3 = dComp.read(5);
          
          Pedido p = dPedido.read(1);
          
          Map<String, Integer> p1 = p.obtenerProductos();
+         
          
 //         p.setFecha(new Date());
 //         

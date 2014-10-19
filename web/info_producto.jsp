@@ -27,7 +27,7 @@
         </style>
         <script>
             function check() {
-               return document.getElementById("myCheck").checked;
+                return document.getElementById("myCheck").checked;
             }
         </script>
     </head>
@@ -44,7 +44,7 @@
                     <br>
                     <label><input type="checkbox" name="activo" <c:if test="${producto.id == 0 || (producto.activo && producto.id != 0)}">checked</c:if>> Disponible</label>
                 <input type="hidden" name="id" value="${producto.id}"/>
-                <input type="hidden" name="nuevo" value="<c:choose><c:when test="${producto.id == 0}">true</c:when><c:otherwise>false</c:otherwise></c:choose>"/>
+                <input type='hidden' name='nuevo' value='${producto.id == 0 ? "true" : "false"}'/>
                 <br>
                 <input type="submit" value="Actualizar" class="btn btn-primary pull-right">
             </form>

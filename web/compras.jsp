@@ -11,7 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page errorPage="proc/error.jsp" %>
 <%@taglib prefix="lg" uri="/WEB-INF/tlds/logincheck.tld"%>
-<lg:logchk admin="false"/>
+<lg:logchk/>
 <jsp:useBean id="usuario" class="Modelo.Usuario" scope="session"/>
 <jsp:useBean id="usrCompras" class="Modelo.Cliente" scope="page"/>
 <jsp:setProperty name="usrCompras" property="id"/>
@@ -52,8 +52,17 @@
             }
         </style>
         <%@ include file="menu.jsp"%> 
+         <script>
+            function goBack() {
+                window.history.back()
+            }
+        </script>
     </head>
     <body>
+        <div style="width: 321px; margin-left: auto; margin-right: auto;">
+            <button onclick="goBack()">Ir atrás</button>
+        </div>
+        <br>
         <div style="width: 321px; margin-left: auto; margin-right: auto;">
             <table class="table table-bordered">
                 <thead>
@@ -61,6 +70,8 @@
                         <th>Fecha</th>
 
                         <th>Total</th>
+                        
+                        <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,6 +80,7 @@
                         <tr>
                             <td>${c.fecha}</td>
                             <td><button type="submit" class="button">$${c.total}</button></td>
+                            <td><c:choose> <c:when test="${c.procesado}">Procesado</c:when><c:otherwise>En espera</c:otherwise></c:choose></td>
                         </tr>
                         <input name="id" type="hidden" value="${c.id}" />
                     </form>

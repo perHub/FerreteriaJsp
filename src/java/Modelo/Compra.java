@@ -26,17 +26,20 @@ public class Compra implements Serializable {
     private float total = 0;
     private Date fecha;
     private Boolean procesado;
+    private Cliente cliente;
 
     public Compra() {
     }
 
-    public Compra(Date fecha, Detalle detalle) {
+    public Compra(Date fecha, Detalle detalle, Cliente cl) {
         agregarDetalle(detalle);
         this.fecha = fecha;
+        this.cliente = cl;
+        this.procesado = false;
     }
 
-    public Compra(int id, Date fecha, Detalle detalle) {
-        this(fecha, detalle);
+    public Compra(int id, Date fecha, Detalle detalle, Cliente cl) {
+        this(fecha, detalle, cl);
         this.id = id;
     }
 
@@ -131,6 +134,16 @@ public class Compra implements Serializable {
 
     public void setProcesado(Boolean procesado) {
         this.procesado = procesado;
+    }
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "cliente_id")
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
 }
