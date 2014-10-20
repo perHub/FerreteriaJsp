@@ -9,6 +9,7 @@ import DAO.DAOCompra;
 import Modelo.Compra;
 import Modelo.Detalle;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -20,6 +21,9 @@ public class CCompra {
 
     public List<Compra> getAll() {
         return dC.getAll();
+    }
+    public Map getAllMap() {
+        return dC.getAllMap();
     }
     public List<Compra> getPendientes() {
         return dC.getPendientes();

@@ -23,6 +23,12 @@ public class Pedido implements Serializable {
     private Date fecha;
     private Map<Integer, Compra> compras = new HashMap<>();
 
+    public Pedido() {
+    }
+    public Pedido(Date fecha) {
+        this.fecha = fecha;
+    }
+
     @Id
     @GeneratedValue
     public int getId() {
@@ -43,7 +49,7 @@ public class Pedido implements Serializable {
         this.fecha = fecha;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pedido")
     @MapKey(name = "id")
     public Map<Integer, Compra> getCompras() {
         return compras;
@@ -54,7 +60,7 @@ public class Pedido implements Serializable {
     }
 
     public void agregarCompra(Compra c) {
-        if (c != null) {
+        if (c != null && !c.getProcesado()) {
             compras.put(c.getId(), c);
         }
     }

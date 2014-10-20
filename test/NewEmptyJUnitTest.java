@@ -6,6 +6,7 @@
 import DAO.*;
 import Modelo.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.After;
@@ -58,16 +59,10 @@ public class NewEmptyJUnitTest {
          
          Pedido p = dPedido.read(1);
          
-         Map<String, Integer> p1 = p.obtenerProductos();
+         Map a = p.obtenerProductos();
          
-         
-//         p.setFecha(new Date());
-//         
-//         p.agregarCompra(c1);
-//         p.agregarCompra(c1);
-//         p.agregarCompra(c3);
-         
-//         dPedido.create(p);
+   
+ 
          
          
          System.out.println("fu");

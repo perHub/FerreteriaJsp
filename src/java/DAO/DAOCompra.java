@@ -18,13 +18,13 @@ import org.hibernate.criterion.Restrictions;
  */
 public class DAOCompra extends GenericDaoJpaImpl<Compra, Integer> {
 
-    @Override
-    public List<Compra> getAll() {
-        Session session = em.unwrap(Session.class);
-        return session.createCriteria(entityClass)
-                .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
-                .list();
-    }
+//    @Override
+//    public List<Compra> getAll() {
+//        Session session = em.unwrap(Session.class);
+//        return session.createCriteria(entityClass)
+//                .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
+//                .list();
+//    }
 
     public List<Compra> getPendientes() {
         Session session = em.unwrap(Session.class);

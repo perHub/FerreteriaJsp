@@ -7,6 +7,7 @@
 <%@page import="java.util.List"%>
 <%@page import="Controladora.CCompra"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="lg" uri="/WEB-INF/tlds/logincheck.tld"%>
 <lg:logchk admin="true"/>
 <%@ page errorPage="proc/error.jsp" %>
 <!DOCTYPE html>
@@ -15,10 +16,10 @@
 
     List<Compra> pendientes = cComp.getPendientes();
 
-    List<Compra> pend = cComp.getAll();
-
-    pageContext.setAttribute("pendientes", pendientes, PageContext.PAGE_SCOPE);
-    pageContext.setAttribute("pend", pend, PageContext.PAGE_SCOPE);
+    if(pendientes.isEmpty()){
+        throw new JspException("No hay compras pendientes");
+    }
+    pageContext.setAttribute("pendientes", pendientes, PageContext.REQUEST_SCOPE);
 %>
 <html>
     <head>
@@ -33,7 +34,7 @@
             <div class="panel-heading">Pedidos pendientes</div>
 
             <!-- Table -->
-            <form method="post">
+            <form method="post" action="proc_pedidos">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -47,7 +48,7 @@
                         <c:forEach items="${pendientes}" var="p">
                             <tr>
                                 <td>
-                                    <input type="checkbox" name="procesar">
+                                    <input type="checkbox" name="${p.id}">
                                 </td>
                                 <td>${p.fecha}</td>
                                 <td>$${p.total}</td>
@@ -59,6 +60,5 @@
                 <div style="margin: auto; position:relative; top:25%; width: 20%;"><button class="btn btn-primary btn-lg" role="button">Procesar pedidos</button></div>
             </form>
         </div>
-
     </body>
 </html>

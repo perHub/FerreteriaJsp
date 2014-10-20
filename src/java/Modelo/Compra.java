@@ -27,6 +27,7 @@ public class Compra implements Serializable {
     private Date fecha;
     private Boolean procesado;
     private Cliente cliente;
+    private Pedido pedido;
 
     public Compra() {
     }
@@ -144,6 +145,16 @@ public class Compra implements Serializable {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "pedido_id")
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
 }

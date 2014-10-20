@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.*;
 import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaSpecification;
 
 /**
  *
@@ -32,7 +33,6 @@ public abstract class GenericDaoJpaImpl<T, PK extends Serializable>
 //        emf = Persistence.createEntityManagerFactory("FerreteriaServletsPU");
 //        em = emf.createEntityManager();
 //    }
-
     public GenericDaoJpaImpl() {
         ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
         this.entityClass = (Class<T>) genericSuperclass
@@ -71,18 +71,19 @@ public abstract class GenericDaoJpaImpl<T, PK extends Serializable>
     public List getAll() {
         Session session = em.unwrap(Session.class);
         return session.createCriteria(entityClass)
-                 .list();
+                .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
+                .list();
     }
-    
-    public Map getAllMap(){
+
+    public Map getAllMap() {
         List<T> lst = getAll();
         HashMap<PK, T> all = new HashMap<>();
-        
-        for(T obj:lst){
+
+        for (T obj : lst) {
             Session session = em.unwrap(Session.class);
-            PK id = (PK)session.getIdentifier(obj);
+            PK id = (PK) session.getIdentifier(obj);
             all.put(id, (T) obj);
-            
+
         }
         return all;
     }
