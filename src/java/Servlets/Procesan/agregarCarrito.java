@@ -65,10 +65,13 @@ public class agregarCarrito extends HttpServlet {
             Compra c = (Compra) session.getAttribute("carrito");
 
             if (c == null) {
-                session.setAttribute("carrito", new Compra(new Date(), new Detalle(findProd(productos, prodId), cantidad), (Cliente)usuario));
+                session.setAttribute("carrito", new Compra(new Date(), new Detalle(findProd(productos, prodId), cantidad), (Cliente) usuario));
+                contarItems(session);
             } else {
-                c.agregarDetalle(new Detalle(findProd(productos, prodId), cantidad));
+                if(c.agregarDetalle(new Detalle(findProd(productos, prodId), cantidad)))
+                    contarItems(session);
             }
+
 
             response.sendRedirect("main.jsp");
         } catch (NullPointerException ex) {
@@ -136,6 +139,19 @@ public class agregarCarrito extends HttpServlet {
         }
         return p;
 
+    }
+    
+    public void contarItems(HttpSession session){
+        
+            Integer itemCount;
+
+            if ((itemCount = (Integer)session.getAttribute("itemCount")) == null) {
+                session.setAttribute("itemCount", 1);
+            }
+            else{
+                
+                session.setAttribute("itemCount", itemCount + 1);
+            }
     }
 
 }
