@@ -4,6 +4,7 @@
     Author     : Peri
 --%>
 
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.List"%>
 <%@page import="Controladora.CCompra"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -11,6 +11,7 @@ import java.util.List;
 import org.hibernate.CacheMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -26,12 +27,12 @@ public class DAOCompra extends GenericDaoJpaImpl<Compra, Integer> {
 //                .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
 //                .list();
 //    }
-
     public List<Compra> getPendientes() {
         Session session = em.unwrap(Session.class);
         return session.createCriteria(entityClass)
                 .add(Restrictions.eq("procesado", false))
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
+                .addOrder(Order.desc("fecha"))
                 .list();
     }
 
@@ -41,6 +42,7 @@ public class DAOCompra extends GenericDaoJpaImpl<Compra, Integer> {
                 .setCacheMode(CacheMode.IGNORE)
                 .add(Restrictions.eq("procesado", true))
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
+                .addOrder(Order.desc("fecha"))
                 .list();
     }
 
