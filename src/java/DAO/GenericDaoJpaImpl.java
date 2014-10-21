@@ -41,9 +41,11 @@ public abstract class GenericDaoJpaImpl<T, PK extends Serializable>
 
     @Override
     public T create(T t) {
+        Session session = em.unwrap(Session.class);
         em.getTransaction().begin();
         em.persist(t);
         em.getTransaction().commit();
+        session.refresh(t);
         return t;
     }
 

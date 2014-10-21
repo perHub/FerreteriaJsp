@@ -8,6 +8,7 @@ package DAO;
 import Modelo.Compra;
 import Modelo.Detalle;
 import java.util.List;
+import org.hibernate.CacheMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
@@ -37,6 +38,7 @@ public class DAOCompra extends GenericDaoJpaImpl<Compra, Integer> {
     public List<Compra> getProcesados() {
         Session session = em.unwrap(Session.class);
         return session.createCriteria(entityClass)
+                .setCacheMode(CacheMode.IGNORE)
                 .add(Restrictions.eq("procesado", true))
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
                 .list();

@@ -54,7 +54,7 @@
                             <div class="col-md-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="text-center"><strong>Órden de pickeo</strong></h3>
+                                        <h3 class="text-center"><strong>Órden de piqueo</strong></h3>
                                     </div>
                                     <div class="panel-body">
                                         <div class="table-responsive">
@@ -109,10 +109,7 @@
                         .table > tbody > tr > .highrow {
                             border-top: 3px solid;
                         }
-                    </style>
-
-                    <!-- Simple Invoice - END -->
-
+                    </style> <!-- Simple Invoice - END -->
                 </div>
                 </body>
                 </html>

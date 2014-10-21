@@ -49,7 +49,7 @@ public class Pedido implements Serializable {
         this.fecha = fecha;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pedido")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pedido")
     @MapKey(name = "id")
     public Map<Integer, Compra> getCompras() {
         return compras;

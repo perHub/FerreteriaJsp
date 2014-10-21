@@ -57,7 +57,7 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${procesados}" var="p">
-                    <form method="post" action="orden_pickeo.jsp">
+                    <form method="post" action="orden_piqueo.jsp">
                         <input name="pedido" type="hidden" value="${p.pedido.getId()}"/>
                         <tr>
                             <td>${p.fecha}</td>
