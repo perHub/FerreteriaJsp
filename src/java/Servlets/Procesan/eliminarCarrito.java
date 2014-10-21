@@ -52,6 +52,7 @@ public class eliminarCarrito extends HttpServlet {
 
             if (c.getDetalles().isEmpty()) {
                 session.setAttribute("carrito", null);
+                response.sendRedirect("main.jsp");
             }
 
             response.sendRedirect("carrito.jsp");

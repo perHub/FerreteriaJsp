@@ -61,7 +61,7 @@
             <br>
             <form name="confirmar" method="post" action="confirmarCompra">
                 <div class="botonConf">
-                    Total de compras: ${carrito.total}
+                    Total de compras: $${carrito.total}
                     <input name="Button2" type="submit" value="Confirmar compras" />
                 </div>
             </form>

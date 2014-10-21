@@ -83,16 +83,19 @@ public class Compra implements Serializable {
         this.detalles = detalles;
     }
 
-    public void agregarDetalle(Detalle d) {     //Los métodos agregar y eliminar detalle sólo deben ser utilizados para objetos creados directamente en memoria y no para aquellos creados por hibernate.
+    public Boolean agregarDetalle(Detalle d) {     //Los métodos agregar y eliminar detalle sólo deben ser utilizados para objetos creados directamente en memoria y no para aquellos creados por hibernate.
         this.total = total + d.getPrecio();
         Detalle detActual;
         
         if ((detActual = findByNombre(d.getProducto().getNombre())) != null) { //Sumo los precios y cantidades, no agrego el objeto.
             detActual.setPrecio(detActual.getPrecio() + d.getPrecio());
             detActual.setCantidad(detActual.getCantidad() + d.getCantidad());
+            return false;
         }
-        else
-            detalles.add(d);         
+        else{
+            detalles.add(d);
+            return true;    //Retorna verdadero si agrega un nuevo objeto
+        }
     }
 
     @SuppressWarnings("null")

@@ -3,7 +3,10 @@
     Created on : 10/10/2014, 19:49:41
     Author     : Peri
 --%>
-
+<%
+  pageContext.setAttribute("itemCount", session.getAttribute("itemCount"), PageContext.REQUEST_SCOPE);  
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -27,7 +30,7 @@
                     </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="carrito.jsp">Ver carrito</a></li>
+                <li><a href="carrito.jsp">Ver carrito <c:if test="${itemCount != null}">(<b>${itemCount}</b>)</c:if> </a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>${usuario.getUsername()} </b> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
