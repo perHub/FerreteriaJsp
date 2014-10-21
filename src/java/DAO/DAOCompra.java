@@ -42,7 +42,7 @@ public class DAOCompra extends GenericDaoJpaImpl<Compra, Integer> {
                 .setCacheMode(CacheMode.IGNORE)
                 .add(Restrictions.eq("procesado", true))
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
-                .addOrder(Order.desc("fecha"))
+                .addOrder(Order.desc("pedido"))
                 .list();
     }
 
