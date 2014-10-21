@@ -50,12 +50,16 @@ public class eliminarCarrito extends HttpServlet {
 
             c.eliminarDetalle(detId);
 
+            Integer itemCount;
+            itemCount = (Integer) session.getAttribute("itemCount");
+            session.setAttribute("itemCount", itemCount - 1);
+
             if (c.getDetalles().isEmpty()) {
                 session.setAttribute("carrito", null);
                 response.sendRedirect("main.jsp");
+            } else {
+                response.sendRedirect("carrito.jsp");
             }
-
-            response.sendRedirect("carrito.jsp");
         } catch (NullPointerException | NotFoundException ex) {
             Logger.getLogger(eliminarCarrito.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoException ex) {
