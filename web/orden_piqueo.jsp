@@ -46,7 +46,7 @@
                     <div class="col-xs-12">
                         <div class="text-center">
                             <i class="fa fa-search-plus pull-left icon"></i>
-                            <h2>Órden número #000${idPedido}</h2>
+                            <h2>Orden número #000${idPedido}</h2>
                         </div>
                         <hr>
 
