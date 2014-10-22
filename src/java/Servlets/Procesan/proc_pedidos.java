@@ -82,7 +82,8 @@ public class proc_pedidos extends HttpServlet {
                 response.sendRedirect("error");
             }
         } catch (NoException ex) {
-            response.sendRedirect("No.html");
+            session.setAttribute("error", "Debe seleccionar una compra.");
+            response.sendRedirect("error");
         } catch (AdminClienteException ex) {
             Logger.getLogger(updtusr.class.getName()).log(Level.SEVERE, null, ex);
             session.setAttribute("error", "No tiene permisos para realizar esta operación.");
