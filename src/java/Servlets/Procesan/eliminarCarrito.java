@@ -50,9 +50,9 @@ public class eliminarCarrito extends HttpServlet {
 
             c.eliminarDetalle(detId);
 
-            Integer itemCount;
-            itemCount = (Integer) session.getAttribute("itemCount");
-            session.setAttribute("itemCount", itemCount - 1);
+//            Integer itemCount;
+//            itemCount = (Integer) session.getAttribute("itemCount");
+            session.setAttribute("itemCount", c.getDetalles().size());
 
             if (c.getDetalles().isEmpty()) {
                 session.setAttribute("carrito", null);

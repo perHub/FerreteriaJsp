@@ -82,4 +82,11 @@ public class Producto implements Serializable {
         this.activo = activo;
     }
 
+    public void reduceStock(int cantidad) throws CantidadInsuficienteException {
+        if (cantidad > stock) {
+            throw new CantidadInsuficienteException(this);
+        }
+        this.stock -= cantidad;
+    }
+
 }

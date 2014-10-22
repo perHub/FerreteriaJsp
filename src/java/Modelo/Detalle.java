@@ -83,11 +83,11 @@ public class Detalle implements Serializable {
         if (cantidad <= 0) {
             throw new IllegalArgumentException("La cantidad no puede ser cero ni negativa.");
         }
-        if (cantidad > p.getStock()) {
-            throw new CantidadInsuficienteException(p);
-        }
-
-        p.setStock(p.getStock() - cantidad);
+//        if (cantidad > p.getStock()) {
+//            throw new CantidadInsuficienteException(p);
+//        }
+//
+//        p.setStock(p.getStock() - cantidad);
         this.precio = precio + p.getPrecio() * cantidad;
         this.producto = p;
     }

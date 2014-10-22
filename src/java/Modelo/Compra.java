@@ -140,7 +140,7 @@ public class Compra implements Serializable {
         this.procesado = procesado;
     }
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "cliente_id")
     public Cliente getCliente() {
         return cliente;
@@ -150,7 +150,7 @@ public class Compra implements Serializable {
         this.cliente = cliente;
     }
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "pedido_id")
     public Pedido getPedido() {
         return pedido;

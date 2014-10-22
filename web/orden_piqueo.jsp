@@ -69,7 +69,7 @@
                                                 <tbody>
                                                     <c:forEach items="${prodsPick.entrySet()}" var="p">
                                                         <tr>
-                                                            <td>${p.key}</td>
+                                                            <td>${p.key.getNombre()}</td>
                                                             <td class="text-center">${p.getValue()}</td>
                                                         </tr>
                                                     </c:forEach>

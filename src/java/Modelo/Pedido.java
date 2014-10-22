@@ -65,21 +65,21 @@ public class Pedido implements Serializable {
         }
     }
 
-    public Map<String, Integer> obtenerProductos() {
+    public Map<Producto, Integer> obtenerProductos() {  //El objeto producto debe ser la key ya que la cantidad puede repetirse
 
-        Map<String, Integer> mapProd = new HashMap<>(); //Key: Nombre, value: cantidad (del detalle)
+        Map<Producto, Integer> mapProd = new HashMap<>(); //Key: Producto, value: cantidad (del detalle)
 
         for (Map.Entry<Integer, Compra> c : compras.entrySet()) {
             for (Detalle d : c.getValue().getDetalles()) {
 
                 Integer cantAnterior;
                 int cantDetalle = d.getCantidad();
-                String nombreProd = d.getProducto().getNombre();
+                Producto prod = d.getProducto();
 
-                if ((cantAnterior = mapProd.get(nombreProd)) != null) { // Uso esta comprobación porque es mas flexible que el método ContainsKey en este caso.
-                    mapProd.put(nombreProd, cantAnterior + cantDetalle);
+                if ((cantAnterior = mapProd.get(prod)) != null) { // Uso esta comprobación porque es mas flexible que el método ContainsKey en este caso.
+                    mapProd.put(prod, cantAnterior + cantDetalle);
                 } else {
-                    mapProd.put(nombreProd, cantDetalle);
+                    mapProd.put(prod, cantDetalle);
                 }
             }
         }

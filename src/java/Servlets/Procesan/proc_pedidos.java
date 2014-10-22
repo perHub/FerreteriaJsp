@@ -10,8 +10,10 @@ import Controladora.CPedido;
 import Exceptions.AdminClienteException;
 import Exceptions.NoException;
 import Modelo.Administrador;
+import Modelo.CantidadInsuficienteException;
 import Modelo.Compra;
 import Modelo.Pedido;
+import Modelo.Producto;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -66,13 +68,19 @@ public class proc_pedidos extends HttpServlet {
 
             Pedido p = new Pedido(new Date());
 
-            for (Map.Entry<String, String[]> mapStr : params.entrySet()) {
+            for (Map.Entry<String, String[]> mapStr : params.entrySet()) { //Proceso los pedidos
                 Compra c = compras.get(Integer.parseInt(mapStr.getKey()));
                 c.setProcesado(Boolean.TRUE);
-                c.setPedido(p);                
+                c.setPedido(p); 
+                p.getCompras().put(c.getId(), c);
             }
             
-            cPedido.agregar(p);
+            Map<Producto, Integer> prodCant = p.obtenerProductos();
+            
+            for (Map.Entry<Producto, Integer> prod : prodCant.entrySet()) {
+                prod.getKey().reduceStock(prod.getValue());
+            }
+            cPedido.agregar(p); //Persisto
             
             response.sendRedirect("pedidos_procesados.jsp");
 
@@ -87,6 +95,9 @@ public class proc_pedidos extends HttpServlet {
         } catch (AdminClienteException ex) {
             Logger.getLogger(updtusr.class.getName()).log(Level.SEVERE, null, ex);
             session.setAttribute("error", "No tiene permisos para realizar esta operación.");
+            response.sendRedirect("error");
+        } catch (CantidadInsuficienteException ex) {
+            session.setAttribute("error", ex.getMessage());
             response.sendRedirect("error");
         }
     }

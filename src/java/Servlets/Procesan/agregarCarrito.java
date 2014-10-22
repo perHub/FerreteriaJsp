@@ -65,11 +65,11 @@ public class agregarCarrito extends HttpServlet {
             Compra c = (Compra) session.getAttribute("carrito");
 
             if (c == null) {
-                session.setAttribute("carrito", new Compra(new Date(), new Detalle(findProd(productos, prodId), cantidad), (Cliente) usuario));
-                contarItems(session);
+                session.setAttribute("carrito", (c = new Compra(new Date(), new Detalle(findProd(productos, prodId), cantidad), (Cliente) usuario)));
+                session.setAttribute("itemCount", c.getDetalles().size());
             } else {
                 if(c.agregarDetalle(new Detalle(findProd(productos, prodId), cantidad)))
-                    contarItems(session);
+                    session.setAttribute("itemCount", c.getDetalles().size());
             }
 
 
