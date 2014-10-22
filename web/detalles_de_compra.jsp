@@ -30,7 +30,7 @@
         <%@ include file="menu.jsp"%> 
         <script>
             function goBack() {
-                window.history.back()
+                window.history.back();
             }
         </script>
     </head>
@@ -53,11 +53,11 @@
                         </tr>
                         <tr>
                             <td>Precio unitario:</td>
-                            <td>${d.getProducto().getPrecio()}</td>
+                            <td>$${d.getProducto().getPrecio()}</td>
                         </tr>
                         <tr>
                             <td>Precio total:</td>
-                            <td>${d.precio}</td>
+                            <td>$${d.precio}</td>
                         </tr>
                     </tbody>
                 </table>

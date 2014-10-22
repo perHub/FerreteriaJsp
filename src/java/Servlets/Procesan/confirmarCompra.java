@@ -66,6 +66,7 @@ public class confirmarCompra extends HttpServlet {
             cUsr.actualizar(cl);
             
             session.setAttribute("carrito", null);
+            session.setAttribute("itemCount", null);
             
             response.sendRedirect("main.jsp");
 
