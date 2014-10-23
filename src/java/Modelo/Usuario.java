@@ -29,8 +29,8 @@ public  class Usuario {
     protected String password;
     protected String nombre;
     protected String apellido;
-    private String email;
-    private Boolean activo;
+    protected String email;
+    protected Boolean activo;
     
     public Usuario(){
         

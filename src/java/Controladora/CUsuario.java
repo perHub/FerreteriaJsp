@@ -18,6 +18,10 @@ public class CUsuario {
     DAOUsuario dUsr = new DAOUsuario();
 //   DAOAdministrador dAdm = new DAOAdministrador();
 //   DAOCliente dCl = new DAOCliente();
+    
+    public Usuario read(int id) {
+        return dUsr.read(id);
+    }
 
     public void agregar(Usuario u) {
         dUsr.create(u);
