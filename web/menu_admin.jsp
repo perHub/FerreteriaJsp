@@ -24,7 +24,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar usuarios <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="admin_usuarios.jsp">Ver usuarios</a></li>
-                        <li><a href="alta_usuario.jsp">Alta de usuario</a></li>
+                        <li><a href="info_usuario.jsp">Alta de usuario</a></li>
                     </ul>
                 </li>
                 
