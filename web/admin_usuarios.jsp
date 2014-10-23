@@ -33,7 +33,7 @@
                     <div class="row user-row">
                         <div class="col-md-1">
                             <img class="img-circle"
-                                 src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=50"
+                                 src="Imgs/user50.png"
                                  alt="User Pic">
                         </div>
                         <div class="col-md-10">
@@ -57,7 +57,7 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <img class="img-circle"
-                                                 src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"
+                                                 src="Imgs/user100.png"
                                                  alt="User Pic">
                                         </div>
                                         <div class="col-md-6">

@@ -46,7 +46,7 @@ public class Producto implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", unique = true)
     public String getNombre() {
         return nombre;
     }

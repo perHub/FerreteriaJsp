@@ -67,7 +67,7 @@ public  class Usuario {
         this.id = id;
     }
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     public String getUsername() {
         return username;
     }
@@ -112,7 +112,7 @@ public  class Usuario {
         this.activo = activo;
     }
     
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     public String getEmail() {
         return email;
     }
