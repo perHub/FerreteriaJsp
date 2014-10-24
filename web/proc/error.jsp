@@ -10,17 +10,20 @@
     </head>
     <body>
         <h1>
-            <% 
-                if(exception.getMessage().equals("No.")){
-                    response.sendRedirect("No.html");
+            <%
+                String msg = null;
+                if (exception != null && exception.getMessage() != null) {
+                    if (exception.getMessage().equals("No.")) {
+                        response.sendRedirect("No.html");
+                    }
+                    if (exception.getMessage() == null) {
+                        msg = (String) session.getAttribute("error");
+                    } else {
+                        msg = exception.getMessage();
+                    }
                 }
-                String msg;
-                if (exception.getMessage() == null) {
-                   msg = (String)session.getAttribute("error");
-                }
-                else{
-                    msg = exception.getMessage();
-                }
+                else
+                    msg = "Error no especificado.";
             %>
             <%=msg%>
         </h1>
