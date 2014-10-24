@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                                 <div class="panel-footer">
-                                    <button class="btn btn-sm btn-primary" type="button"
+                                    <button class="btn btn-sm btn-primary" type="button" onclick="javascript:window.location='mailto:${usr.email}&subject=Contacto'"
                                             data-toggle="tooltip"
                                             data-original-title="Enviar mensaje a usuario"><i class="glyphicon glyphicon-envelope"></i></button>
                                     <span class="pull-right">
