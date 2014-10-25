@@ -55,7 +55,7 @@
                             <label class="control-label" for="email">Email</label>
 
                             <div class="controls">
-                                <input name="email" placeholder="Ej: testing@mail.com" type="text" value="<c:if test="${usr0.email != null}">${usr0.email}</c:if>" required>
+                                <input name="email" placeholder="Ej: testing@mail.com" type="email" value="<c:if test="${usr0.email != null}">${usr0.email}</c:if>" required>
                             </div>
                         </div>
 

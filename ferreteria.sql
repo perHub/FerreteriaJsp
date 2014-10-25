@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 20, 2014 at 05:45 AM
+-- Generation Time: Oct 25, 2014 at 06:28 AM
 -- Server version: 5.5.39
 -- PHP Version: 5.4.33
 
@@ -286,13 +286,13 @@ ALTER TABLE `pedidos`
 -- Indexes for table `productos`
 --
 ALTER TABLE `productos`
- ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
- ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `username` (`username`), ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `usuarios_compras`

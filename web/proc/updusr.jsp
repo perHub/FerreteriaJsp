@@ -10,7 +10,7 @@
 <lg:logchk admin="true"/>
 <jsp:useBean id="usr" class="Modelo.Cliente" scope="request"/>
 <jsp:setProperty name="usr" property="*"/>
-<%@ page errorPage="proc/error.jsp" %>
+<%@ page errorPage="error.jsp" %>
 <jsp:useBean id="nuevo" class="oracle.jsp.jml.JmlBoolean" scope="request"/>
 <jsp:setProperty name="nuevo" property="value"/>
 

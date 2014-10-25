@@ -13,6 +13,7 @@ import java.util.Map;
 import javax.persistence.*;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.exception.ConstraintViolationException;
 
 /**
  *
@@ -40,34 +41,55 @@ public abstract class GenericDaoJpaImpl<T, PK extends Serializable>
     }
 
     @Override
-    public T create(T t) {
+    public T create(T t) throws ConstraintViolationException {
         Session session = em.unwrap(Session.class);
-        em.getTransaction().begin();
-        em.persist(t);
-        em.getTransaction().commit();
+
+        try {
+            em.getTransaction().begin();
+            em.persist(t);
+            em.getTransaction().commit();
+        } catch (ConstraintViolationException ex) {
+            throw ex;
+        } finally {
+            if(em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+        }
         session.refresh(t);
         return t;
     }
 
     @Override
-    public T read(PK id) {//Arreglar
+    public T read(PK id) {
         return this.em.find(entityClass, id);
     }
 
     @Override
     public T update(T t) {
-        em.getTransaction().begin();
-        em.merge(t);
-        em.getTransaction().commit();
+        try {
+            em.getTransaction().begin();
+            em.merge(t);
+            em.getTransaction().commit();
+        } finally {
+            if(em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+        }
         return t;
     }
 
     @Override
     public void delete(T t) {
-        em.getTransaction().begin();
-        t = this.em.merge(t);
-        this.em.remove(t);
-        em.getTransaction().commit();
+        try {
+            em.getTransaction().begin();
+            t = this.em.merge(t);
+            this.em.remove(t);
+            em.getTransaction().commit();
+        } finally {
+           if(em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+        }
     }
 
     public List getAll() {

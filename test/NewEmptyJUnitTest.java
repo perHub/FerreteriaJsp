@@ -50,10 +50,12 @@ public class NewEmptyJUnitTest {
         DAOProducto dProd = new DAOProducto();
         DAOCompra dComp = new DAOCompra();
         DAOPedido dPedido = new DAOPedido();
-        ;
-//         Compra c1 = dComp.read(1);
-//         Compra c2 = dComp.read(4);
-//         Compra c3 = dComp.read(5);
+        DAOUsuario dusr = new DAOUsuario();
+        String admin = "admin";
+
+        Usuario u1 = new Administrador(0, admin,admin, admin, admin);
+
+        dusr.create(u1);
         
         Producto p = dProd.read(1);
         p.reduceStock(4000);
