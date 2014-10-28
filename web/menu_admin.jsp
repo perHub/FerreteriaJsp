@@ -3,7 +3,19 @@
     Created on : 10/10/2014, 19:15:29
     Author     : Peri
 --%>
+<%@page import="Exceptions.NoException"%>
+<%@page import="Exceptions.loginException"%>
+<%@page import="Modelo.*"%>
+<%@ page errorPage="proc/error.jsp" %>
+<%                                                         //No puedo usar un bean acá porque será repetido en las paginas contenedoras.
+    Usuario usrtmp = (Usuario)session.getAttribute("usuario");
+    
+    if (usrtmp.getClass() == Cliente.class) {
+         throw new NoException("No.");
 
+    }
+
+%>
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->

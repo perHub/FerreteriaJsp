@@ -16,14 +16,14 @@
 <lg:logchk/>
 <jsp:useBean id="usuario" class="Modelo.Usuario" scope="session"/>
 
-<%! 
+<%!
     List<Producto> lstProd;
 %>
 
 <%
     CProducto cProd = new CProducto();
     lstProd = cProd.getAllActivated();
-    
+
     pageContext.setAttribute("lstProd", lstProd, PageContext.PAGE_SCOPE);
     session.setAttribute("productos", lstProd);
 
@@ -55,15 +55,28 @@
                             </tr>
                             <tr>
                                 <td style="width: 319px">Stock:</td>
-                                <td><c:out value="${prod.stock}"/></td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${prod.stock != 0}">
+                                            <c:out value="${prod.stock}"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <label style="color: red"> Sin stock</label>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
                             </tr>
                         </table>
-                        <div class="auto-style1" style="width: 322px; height: 27px">Cantidad: <input type="number" name="cantidad"  required value="1" min="1" max="<c:out value="${prod.stock}"/>" style="width: 50px">
-                            <input type="hidden" name="prodId" value="<c:out value="${prod.id}"/>"/>
-                            <input name="Button1" type="submit" value="Agregar al carrito" />&nbsp;
-                            <br />
-                            <br />
-                        </div>
+                        <c:choose>
+                            <c:when test="${prod.stock != 0}">
+                                <div class="auto-style1" style="width: 322px; height: 27px">Cantidad: <input type="number" name="cantidad"  required value="1" min="1" max="<c:out value="${prod.stock}"/>" style="width: 50px">
+                                    <input type="hidden" name="prodId" value="<c:out value="${prod.id}"/>"/>
+                                    <input name="Button1" type="submit" value="Agregar al carrito" />&nbsp;
+                                    <br />
+                                    <br />
+                                </div>
+                            </c:when>
+                        </c:choose>
                     </div>
                 </form>
             </c:forEach>
