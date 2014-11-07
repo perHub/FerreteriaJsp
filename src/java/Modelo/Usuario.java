@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 import org.hibernate.annotations.DiscriminatorOptions;
 
@@ -12,6 +14,8 @@ import org.hibernate.annotations.DiscriminatorOptions;
  *
  * @author Peri
  */
+@ManagedBean
+@SessionScoped
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorOptions(force=true)

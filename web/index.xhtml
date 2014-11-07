@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      >
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
   <h:head>
   
 
@@ -29,14 +29,13 @@
   </h:head>
 
   <h:body>
-
     <div class="container">
         <!-- <form class="form-signin" role="form" action="Login" method="post"> -->
         <h:form styleClass="form-signin" >
         <h2 class="form-signin-heading">Inicie sesión</h2>
-        <h:inputText value="#{usuario.username}" styleClass="form-control" />
-        <h:inputSecret value="#{usuario.password}" styleClass="form-control" />
-        <h:commandButton styleClass="btn btn-lg btn-primary btn-block" action="#{login.login()}" value="Iniciar sesión"></h:commandButton>
+        <h:inputText value="#{usuario.username}" styleClass="form-control"  p:placeholder="Nombre de usuario"/>
+        <h:inputSecret value="#{usuario.password}" styleClass="form-control"  p:placeholder="Contraseña"/>
+        <h:commandButton styleClass="btn btn-lg btn-primary btn-block" action="#{CUsuario.login()}" value="Iniciar sesión"/>
         </h:form>
 
     </div> <!-- /container -->

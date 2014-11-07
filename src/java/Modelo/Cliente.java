@@ -8,6 +8,8 @@ package Modelo;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.persistence.*;
 import org.hibernate.annotations.DiscriminatorOptions;
 
@@ -15,6 +17,8 @@ import org.hibernate.annotations.DiscriminatorOptions;
  *
  * @author Peri
  */
+@ManagedBean
+@RequestScoped
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(

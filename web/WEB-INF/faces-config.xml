@@ -3,15 +3,16 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
-
-    <managed-bean>
-        <managed-bean-name>usuario</managed-bean-name>
-        <managed-bean-class>Modelo.Administrador</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
+    <navigation-rule>    
+        <navigation-case>
+            <from-action>#{CUsuario.login()}</from-action>
+            <from-outcome>a</from-outcome>
+            <to-view-id>/admin_usuarios.jsp</to-view-id>
+        </navigation-case>
     
-    <navigation-case>
-        <from-outcome>loginSuccess</from-outcome>
-        <to-view-id>admin_usuarios.jsp</to-view-id>
-    </navigation-case>
+        <navigation-case>
+            <from-outcome>clienteLogged</from-outcome>
+            <to-view-id>main.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
