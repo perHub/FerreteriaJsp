@@ -6,3 +6,4 @@ username: cl2 password: cliente3
 username: cl3 password: cliente4
 
 Será necesarios cambiar la contraseña de acceso a la DB en el archivos persistence.xml
+Repositorio: https://github.com/perHub/FerreteriaJsp

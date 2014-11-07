@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/FerreteriaJsp">
+<Context antiJARLocking="true" path="/FerreteriaJsf">
   <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="ferreteria" password="root" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/ferreteria?zeroDateTimeBehavior=convertToNull" username="root"/>
 </Context>
