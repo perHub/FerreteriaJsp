@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html lang="es"  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    <h:head>
+        <meta charset="UTF-8"/> 
+        <ui:composition>
+            <!-- Bootstrap core CSS -->
+            <link href="dist/css/bootstrap.min.css" rel="stylesheet"/>
+            <link href="dist/css/signin.css" rel="stylesheet"/>
+            <script src="dist/js/jquery.min.js"></script>
+            <script src="dist/js/bootstrap.min.js"></script>
+            <c:choose>
+                <c:when test="${usuario.esAdmin()}">
+                    <ui:include src="/menu_admin.xhtml"/>
+                </c:when>
+            </c:choose>
+
+        </ui:composition>
+    </h:head>
+
+
+</html>
+
+

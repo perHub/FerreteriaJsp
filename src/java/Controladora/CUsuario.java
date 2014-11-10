@@ -66,7 +66,11 @@ public class CUsuario {
         }
         return rtr;
     }
-
+    public void settearUsuarios(){
+         List<Usuario> usuarios = dUsr.getAll();
+         session.setAttribute("usuarios", usuarios);
+         session.setAttribute("admin", "Administrador");
+    }
     public Usuario getById(int id) {
         return dUsr.read(id);
     }

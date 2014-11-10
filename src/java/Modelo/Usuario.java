@@ -125,5 +125,14 @@ public  class Usuario {
         this.email = email;
     }
 
-  
+  public Boolean esAdmin() throws Exception{
+      if(this.getClass().equals(Administrador.class))
+      {
+          return true;
+      }
+      else if(this.getClass().equals(Cliente.class)){
+          return false;
+      }
+      throw new Exception("Nada");
+  }
 }
