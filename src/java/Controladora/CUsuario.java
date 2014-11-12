@@ -6,12 +6,14 @@
 package Controladora;
 
 import DAO.*;
+import Exceptions.AdminClienteException;
 import Exceptions.NoException;
+import Exceptions.loginException;
 import Modelo.*;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +26,8 @@ import javax.servlet.http.HttpSession;
 public class CUsuario {
 
     HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+    Map<String, String> requestParams = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+
     DAOUsuario dUsr = new DAOUsuario();
 //   DAOAdministrador dAdm = new DAOAdministrador();
 //   DAOCliente dCl = new DAOCliente();
@@ -44,6 +48,14 @@ public class CUsuario {
         return dUsr.getAll();
     }
 
+    public Usuario getById(int id) {
+        return dUsr.read(id);
+    }
+
+    //Los métodos de arriba deberán ser eliminados enventualmente.
+//**********************************************************
+//Los siguientes métodos ayudan a las relgas de navegación:
+//**********************************************************
     public String login() throws NoException {
 //        return dUsr.login(username, password);
         String rtr = "";
@@ -57,22 +69,78 @@ public class CUsuario {
             }
 
             if (usuario.getClass() == Administrador.class) {
-                rtr = "a";
+                rtr = "AdminLoggedIn";
             } else {
                 session.setAttribute("compUsrId", usuario.getId());
-                rtr = "clienteLogged";
+                rtr = "ClienteLoggedIn";
             }
 
         }
         return rtr;
     }
-    public void settearUsuarios(){
-         List<Usuario> usuarios = dUsr.getAll();
-         session.setAttribute("usuarios", usuarios);
-         session.setAttribute("admin", "Administrador");
+    
+    
+    public String cargarUsuarioParaEdicion() throws Exception {
+        Usuario usr;
+        if (!requestParams.isEmpty()) {
+            int usrId = Integer.parseInt(requestParams.get("usrId"));
+            usr = dUsr.read(usrId);
+
+            session.setAttribute("usr0", usr);
+            
+            return "EditUsr";
+        }
+        return "Error";
     }
-    public Usuario getById(int id) {
-        return dUsr.read(id);
+
+//************************************************************************************
+//Los siguientes métodos realizan tareas no relacionadas con las reglas de navegacion:
+//************************************************************************************
+    public Boolean usuarioEstaLogueado() throws loginException {
+        Usuario usr = (Usuario) session.getAttribute("usuario");
+
+        if (usr != null) {
+            if (usr.getClass().equals(Administrador.class) || usr.getClass().equals(Cliente.class)) {
+                return true;
+            }
+        }
+        throw new loginException();     //Controlo el estado de "no estar logueado" con una excepción para poder capturarla fácilmente en la página de error.
     }
+
+    //El siguiente método sólo deberá ser usado con el objetivo de que el framework pueda atrapar determinadas excepciones y responder en consecuencia. Pero NO debe usarse como comprobación lógica.
+    public Boolean soloVisibleParaAdmin(Boolean CA) throws loginException, AdminClienteException { //True=Página sólo podrá ser vista por el admin; False= Sólo por el Cliente
+        Usuario usr = (Usuario) session.getAttribute("usuario");
+
+        Boolean esAdm = usr.getClass().equals(Administrador.class);
+        Boolean esCliente = usr.getClass().equals(Cliente.class);
+
+        if (!esAdm && !esCliente) {             //Si ninguna de estas comprobaciones se cumple, la página podrá ser renderizada
+            throw new loginException();
+        }
+        if (!CA && esAdm) {
+            throw new AdminClienteException();
+        } else if (CA && esCliente) {
+            throw new AdminClienteException();
+        }
+
+        return true;
+    }
+
+//    public Boolean usuarioLogueadoEsAdmin() throws loginException {
+//        Usuario usr = (Usuario) session.getAttribute("usuario");
+//
+//        if (usr.getClass().equals(Administrador.class)) {
+//            return true;
+//        } else if (usr.getClass().equals(Cliente.class)) {
+//            return false;
+//        }
+//        throw new loginException();
+//    }
+    public void settearUsuarios() { //Actualmente no se usa
+        List<Usuario> usuarios = dUsr.getAll();
+        session.setAttribute("usuarios", usuarios);
+        session.setAttribute("admin", "Administrador");
+    }
+
 
 }

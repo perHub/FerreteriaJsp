@@ -25,7 +25,7 @@
     <h:body>
         <div class="container">
             <div class="well col-sm-12 col-md-8 col-md-offset-2">
-                <c:forEach items="${CUsuario.all}" var="usr">
+                <ui:repeat value="${CUsuario.all}" var="usr">
                     <div class="row user-row">
                         <div class="col-md-1">
                             <img class="img-circle"
@@ -33,8 +33,8 @@
                                  alt="User Pic"/>
                         </div>
                         <div class="col-md-10">
-                            <strong>${usr.username} <c:if test="${!usr.isActivo()}">(inactivo)</c:if></strong>
-                            <span class="text-muted">Tipo de usuario: <c:choose> <c:when test="${usr.esAdmin()}">Administrador</c:when><c:otherwise>Cliente</c:otherwise></c:choose></span>
+                            <strong>${usr.username} <ui:fragment rendered="${!usr.isActivo()}">(inactivo)</ui:fragment></strong>
+                            <span class="text-muted">Tipo de usuario: <ui:fragment rendered="${usr.esAdmin()}">Administrador</ui:fragment><ui:fragment rendered="${!usr.esAdmin()}">Cliente</ui:fragment></span>
                         </div>
                         <!-- add .rowname class to attribute data-for (Dropdown!)-->
                         <div class="col-md-1 dropdown-user" data-for=".${usr.username}">
@@ -73,7 +73,7 @@
                                                         <td>${usr.email}</td>
                                                     </tr>
                                                     <!-- Info específica del cliente -->
-                                                    <c:if test="${!usr.esAdmin()}">
+                                                    <ui:fragment rendered="${!usr.esAdmin()}">
                                                         <tr>
                                                             <td>DNI:</td>
                                                             <td>${usr.dni}</td>
@@ -93,7 +93,7 @@
                                                                 <td><button type="submit" class="button" formaction="compras.jsp">Ver</button></td>
                                                             </form>
                                                         </tr>
-                                                    </c:if>
+                                                    </ui:fragment>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -103,17 +103,25 @@
                                     <button class="btn btn-sm btn-primary" type="button" onclick="javascript:window.location = 'mailto:${usr.email}&amp;subject=Contacto'"
                                             data-toggle="tooltip"
                                             data-original-title="Enviar mensaje a usuario"><i class="glyphicon glyphicon-envelope"></i></button>
-                                    <span class="pull-right">
-                                        <button class="btn btn-sm btn-warning" type="submit"
-                                                data-toggle="tooltip"
-                                                data-original-title="Editar usuario"><i class="glyphicon glyphicon-edit"></i></button>
-                                    </span>
+                                    <ui:fragment rendered="#{!usr.esAdmin()}">
+                                        <span class="pull-right">
+                                            <h:form>
+                                                <input type="hidden" name="usrId" value="${usr.id}"/>
+                                                <h:commandButton styleClass="btn btn-sm btn-warning" 
+                                                                 p:data-toggle="tooltip" 
+                                                                 p:data-original-title="Editar usuario" 
+                                                                 value="Editar"
+                                                                 action="#{CUsuario.cargarUsuarioParaEdicion()}">    
+                                                </h:commandButton>
+                                            </h:form>
+                                        </span>
+                                    </ui:fragment>
                                 </div>
                                 <!-- </form> -->
                             </div>
                         </div>
                     </div>
-                </c:forEach>
+                </ui:repeat>
             </div>
         </div><!-- /.container -->
 

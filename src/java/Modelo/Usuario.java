@@ -18,15 +18,14 @@ import org.hibernate.annotations.DiscriminatorOptions;
 @SessionScoped
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorOptions(force=true)
+@DiscriminatorOptions(force = true)
 @DiscriminatorColumn(
         name = "tipousr",
         discriminatorType = DiscriminatorType.STRING
 )
 
 //@Table(name="usuarios")
-
-public  class Usuario {
+public class Usuario {
 
     protected int id;
     protected String username;
@@ -35,32 +34,34 @@ public  class Usuario {
     protected String apellido;
     protected String email;
     protected Boolean activo;
-    
-    public Usuario(){
-        
+
+    public Usuario() {
+
     }
+
     public Usuario(String username, String nombre, String apellido) {
         this.username = username;
         this.nombre = nombre;
         this.apellido = apellido;
         this.activo = true;
     }
+
     public Usuario(int id, String username, String nombre, String apellido) {
         this(username, nombre, apellido);
         this.id = id;
     }
-    
+
     public Usuario(String username, String password, String nombre, String apellido) {
         this(username, nombre, apellido);
         this.password = password;
     }
-    
+
     public Usuario(int id, String username, String password, String nombre, String apellido) {
         this(username, password, nombre, apellido);
         this.id = id;
-        
+
     }
-    
+
     @Id
     @GeneratedValue
     public int getId() {
@@ -106,7 +107,7 @@ public  class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     @Column(name = "activo")
     public Boolean isActivo() {
         return activo;
@@ -115,7 +116,7 @@ public  class Usuario {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-    
+
     @Column(name = "email", unique = true)
     public String getEmail() {
         return email;
@@ -125,14 +126,7 @@ public  class Usuario {
         this.email = email;
     }
 
-  public Boolean esAdmin() throws Exception{
-      if(this.getClass().equals(Administrador.class))
-      {
-          return true;
-      }
-      else if(this.getClass().equals(Cliente.class)){
-          return false;
-      }
-      throw new Exception("Nada");
-  }
+    public Boolean esAdmin() throws Exception {
+        throw new Exception("Error no especificado procesando al usuario.");
+    }
 }

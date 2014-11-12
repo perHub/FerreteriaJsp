@@ -7,16 +7,21 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-    <navigation-rule>    
+    <navigation-rule>   
         <navigation-case>
             <from-action>#{CUsuario.login()}</from-action>
-            <from-outcome>a</from-outcome>
+            <from-outcome>AdminLoggedIn</from-outcome>
             <to-view-id>/admin_usuarios.xhtml</to-view-id>
         </navigation-case>
     
         <navigation-case>
-            <from-outcome>clienteLogged</from-outcome>
+            <from-outcome>ClienteLoggedIn</from-outcome>
             <to-view-id>main.jsp</to-view-id>
         </navigation-case>
-    </navigation-rule>
+        
+        <navigation-case>
+            <from-outcome>EditUsr</from-outcome>
+            <to-view-id>/info_usuario.xhtml</to-view-id>
+        </navigation-case>  
+    </navigation-rule>  
 </faces-config>

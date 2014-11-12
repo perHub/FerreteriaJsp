@@ -100,4 +100,8 @@ public class Cliente extends Usuario implements Serializable {
         compras.add(c);
     }
 
+    @Override
+    public Boolean esAdmin(){
+        return false;
+    }
 }
