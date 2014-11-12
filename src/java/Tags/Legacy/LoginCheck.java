@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tags;
+package Tags.Legacy;
 
 import Exceptions.AdminClienteException;
 import Exceptions.loginException;

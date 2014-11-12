@@ -5,7 +5,7 @@
   <uri>/WEB-INF/tlds/usuariocheck</uri>
   <tag>
     <name>usrchk</name>
-    <tag-class>Tags.UsuarioCheck</tag-class>
+    <tag-class>Tags.Legacy.UsuarioCheck</tag-class>
     <body-content>empty</body-content>
     <attribute>
       <required>true</required>
