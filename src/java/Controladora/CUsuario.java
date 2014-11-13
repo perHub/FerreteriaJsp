@@ -15,6 +15,7 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -27,6 +28,7 @@ public class CUsuario {
 
     HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
     Map<String, String> requestParams = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
     DAOUsuario dUsr = new DAOUsuario();
 //   DAOAdministrador dAdm = new DAOAdministrador();
@@ -69,7 +71,7 @@ public class CUsuario {
             }
 
             if (usuario.getClass() == Administrador.class) {
-                rtr = "AdminLoggedIn";
+                rtr = "AdminUsr";
             } else {
                 session.setAttribute("compUsrId", usuario.getId());
                 rtr = "ClienteLoggedIn";
@@ -79,18 +81,36 @@ public class CUsuario {
         return rtr;
     }
     
-    
+    public void clearUsr0()
+    {
+        if(requestParams.isEmpty()){
+            Cliente cl = new Cliente();
+            cl.setActivo(true);
+            session.setAttribute("usr0", cl);
+        }
+    }
+
     public String cargarUsuarioParaEdicion() throws Exception {
+
         Usuario usr;
         if (!requestParams.isEmpty()) {
             int usrId = Integer.parseInt(requestParams.get("usrId"));
             usr = dUsr.read(usrId);
 
             session.setAttribute("usr0", usr);
-            
+
             return "EditUsr";
         }
         return "Error";
+    }
+
+    public String saveUsr() { //El scope es session por facilidad
+        
+        Cliente usr = (Cliente) session.getAttribute("usr0");
+
+        dUsr.update(usr);
+
+        return "AdminUsr";
     }
 
 //************************************************************************************
@@ -141,6 +161,5 @@ public class CUsuario {
         session.setAttribute("usuarios", usuarios);
         session.setAttribute("admin", "Administrador");
     }
-
 
 }

@@ -9,7 +9,7 @@
       >
     <h:head rendered="${CUsuario.soloVisibleParaAdmin(true)}">
         <title>Alta/modificación de usuario</title>
-
+        #{CUsuario.clearUsr0()}
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>Alta de usuario</title>
         <ui:include src="/menu.xhtml"/>
@@ -23,78 +23,121 @@
         <div class="span6 center-block">
             <h1>Nuevo cliente</h1>
             <div class="area">
-
-                <div class="control-group">
-                    <label class="control-label" for="nombre">Nombre</label>
-                    <div class="controls">
-                        <h:inputText value="#{usr0.nombre}"/>
+                <h:form>
+                    <div class="control-group">
+                        <label class="control-label" for="nombre">Nombre</label>
+                        <div class="controls">
+                            <h:inputText id="nombre" 
+                                         value="#{usr0.nombre}"
+                                         p:placeholder="Ej: Pedro"
+                                         required="true" 
+                                         requiredMessage="Debe ingresar un nombre"
+                                         />
+                        </div>
                     </div>
-                </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="apellido">Apellido</label>
-                    <div class="controls">
-
+                    <div class="control-group">
+                        <label class="control-label" for="apellido">Apellido</label>
+                        <div class="controls">
+                            <h:inputText id="apellido" 
+                                         value="#{usr0.apellido}"
+                                         p:placeholder="Ej: Martínez"
+                                         required="true" 
+                                         requiredMessage="Debe ingresar un apellido"
+                                         />
+                        </div>
                     </div>
-                </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="email">Email</label>
-
-                    <div class="controls">
-
+                    <div class="control-group">
+                        <label class="control-label" for="email">Email</label>
+                        <div class="controls">
+                            <h:inputText id="mail" 
+                                         value="#{usr0.email}"
+                                         p:placeholder="Ej: admin@ferreteria.com"
+                                         required="true" 
+                                         requiredMessage="Debe ingresar una dirección de correo"
+                                         validatorMessage="La dirección de correo ingresada no es válida"
+                                         >
+                                <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                            </h:inputText>
+                        </div>
                     </div>
-                </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="username">Username</label>
-
-                    <div class="controls">
-
+                    <div class="control-group">
+                        <label class="control-label" for="username">Username</label>
+                        <div class="controls">
+                            <h:inputText id="username" 
+                                         value="#{usr0.username}"
+                                         p:placeholder="Ej: pqa57"
+                                         required="true" 
+                                         requiredMessage="Debe ingresar un nombre de usuario"
+                                         />
+                        </div>
                     </div>
-                </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="password">Password</label>
+                    <div class="control-group">
+                        <label class="control-label" for="password">Password</label>
+                        <div class="controls">
+                            <h:inputSecret id="password" validatorMessage="El password debe estar compuesto de al menos 8 caracteres"
+                                           value="#{usr0.password}"
+                                           p:placeholder="Mín. 8 caracteres"
+                                           required="true" 
+                                           requiredMessage="Debe ingresar una contraseña"
+                                           >
+                                <f:validateLength minimum="8"/>
+                            </h:inputSecret>
 
-                    <div class="controls">
-
+                        </div>
                     </div>
-                </div>
 
-                <!--Datos especìficos del cliente.-->
+                    <!--Datos especìficos del cliente.-->
 
-                <div class="control-group">
-                    <label class="control-label" for="dni">DNI</label>
-
-                    <div class="controls">
-
+                    <div class="control-group">
+                        <label class="control-label" for="dni">DNI</label>
+                        <div class="controls">
+                            <h:inputText id="dni" validatorMessage="El dni debe ser un número"
+                                         value="#{usr0.dni}"
+                                         p:placeholder="Ej: 112223333"
+                                         required="true" 
+                                         requiredMessage="Debe ingresar el número de documento"
+                                         >
+                                <f:convertNumber integerOnly="true" type="number" />
+                            </h:inputText>
+                        </div>
                     </div>
-                </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="direccion">Dirección</label>
-
-                    <div class="controls">
-
+                    <div class="control-group">
+                        <label class="control-label" for="direccion">Dirección</label>
+                        <div class="controls">
+                            <h:inputText id="direccion" 
+                                         value="#{usr0.direccion}"
+                                         p:placeholder="Ej: ABC 123"
+                                         required="true" 
+                                         requiredMessage="Debe ingresar una dirección"
+                                         />
+                        </div>
                     </div>
-                </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="telefono">Teléfono</label>
-
-                    <div class="controls">
-
+                    <div class="control-group">
+                        <label class="control-label" for="telefono">Teléfono</label>
+                        <div class="controls">
+                             <h:inputText id="telefono" 
+                                         value="#{usr0.telefono}"
+                                         p:placeholder="Ej: 4801111"
+                                         required="true" 
+                                         requiredMessage="Debe ingresar un teléfono"
+                                         />
+                        </div>
                     </div>
-                </div>
-
-
-                <div class="control-group">
-                    <div class="controls">
-                        <button class="btn btn-success" type="submit">Crear/Actualizar</button>
+                    <h:selectBooleanCheckbox value="#{usr0.activo}"/>
+                    <h:inputHidden value="#{usr0.id}"/>
+                    <div class="control-group">
+                        <div class="controls"><br/>
+                            <h:commandButton action="#{CUsuario.saveUsr()}" styleClass="btn btn-success" value="Crear/Actualizar"></h:commandButton>
+                        </div><br/>                   
                     </div>
-                </div>
-
+                    <h:messages style="Color: red"/>
+                </h:form>
             </div>
         </div>
     </h:body>

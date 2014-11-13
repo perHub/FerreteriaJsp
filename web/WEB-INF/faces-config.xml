@@ -9,8 +9,7 @@
     </servlet-mapping>
     <navigation-rule>   
         <navigation-case>
-            <from-action>#{CUsuario.login()}</from-action>
-            <from-outcome>AdminLoggedIn</from-outcome>
+            <from-outcome>AdminUsr</from-outcome>
             <to-view-id>/admin_usuarios.xhtml</to-view-id>
         </navigation-case>
     
@@ -24,4 +23,10 @@
             <to-view-id>/info_usuario.xhtml</to-view-id>
         </navigation-case>  
     </navigation-rule>  
+    
+    <managed-bean>
+        <managed-bean-name>usr0</managed-bean-name>
+        <managed-bean-class>Modelo.Cliente</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean> 
 </faces-config>

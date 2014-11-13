@@ -33,7 +33,7 @@ public class Usuario {
     protected String nombre;
     protected String apellido;
     protected String email;
-    protected Boolean activo;
+    protected boolean activo;
 
     public Usuario() {
 
@@ -109,11 +109,11 @@ public class Usuario {
     }
 
     @Column(name = "activo")
-    public Boolean isActivo() {
+    public boolean isActivo() {
         return activo;
     }
 
-    public void setActivo(Boolean activo) {
+    public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
@@ -128,5 +128,26 @@ public class Usuario {
 
     public Boolean esAdmin() throws Exception {
         throw new Exception("Error no especificado procesando al usuario.");
+    }
+
+    @Override
+    public boolean equals(Object other) {
+
+        boolean rta = false;
+
+        if (other.getClass().equals(this.getClass())) {
+            
+            Usuario usr = (Usuario) other;
+            
+            rta = usr.getId() == this.getId();
+        }
+        return rta;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + this.id;
+        return hash;
     }
 }
