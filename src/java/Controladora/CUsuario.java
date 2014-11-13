@@ -80,15 +80,6 @@ public class CUsuario {
         }
         return rtr;
     }
-    
-    public void clearUsr0()
-    {
-        if(requestParams.isEmpty()){
-            Cliente cl = new Cliente();
-            cl.setActivo(true);
-            session.setAttribute("usr0", cl);
-        }
-    }
 
     public String cargarUsuarioParaEdicion() throws Exception {
 
@@ -105,7 +96,7 @@ public class CUsuario {
     }
 
     public String saveUsr() { //El scope es session por facilidad
-        
+
         Cliente usr = (Cliente) session.getAttribute("usr0");
 
         dUsr.update(usr);
@@ -156,6 +147,14 @@ public class CUsuario {
 //        }
 //        throw new loginException();
 //    }
+    public void clearUsr0() {
+        if (requestParams.isEmpty()) {
+            Cliente cl = new Cliente();
+            cl.setActivo(true);
+            session.setAttribute("usr0", cl);
+        }
+    }
+
     public void settearUsuarios() { //Actualmente no se usa
         List<Usuario> usuarios = dUsr.getAll();
         session.setAttribute("usuarios", usuarios);
