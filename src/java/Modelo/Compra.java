@@ -10,12 +10,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javassist.NotFoundException;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 
 /**
  *
  * @author Peri
  */
+
 @Entity
 @Table(name = "compras")
 

@@ -39,7 +39,7 @@
             <button onclick="goBack()">Ir a compras</button>
         </div>
         <br>
-        <c:forEach items="${detalles}" var="d">
+    <c:forEach items="${detalles}" var="d">
             <div style="width: 321px; margin-left: auto; margin-right: auto;">
                 <table class="table table-bordered">
                     <tbody>

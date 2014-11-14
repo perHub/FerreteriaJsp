@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    <h:head rendered="#{CUsuario.soloVisibleParaAdmin(true)}">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <title>Detalles de compra</title>
+            <ui:include src="/menu.xhtml"/>
+            <script>
+                function goBack() {
+                    window.history.back();
+                }
+            </script>
+    </h:head>
+    <h:body>
+        <div style="width: 321px; margin-left: auto; margin-right: auto;">
+            <button onclick="goBack()">Ir a compras</button>
+        </div>
+        <br/>
+            <c:forEach items="#{detalles}" var="d">
+                <div style="width: 321px; margin-left: auto; margin-right: auto;">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>Prducto:</td>
+                                <td>${d.getProducto().getNombre()}</td>
+                            </tr>
+                            <tr>
+                                <td>Cantidad:</td>
+                                <td>${d.cantidad}</td>
+                            </tr>
+                            <tr>
+                                <td>Precio unitario:</td>
+                                <td>$${d.getProducto().getPrecio()}</td>
+                            </tr>
+                            <tr>
+                                <td>Precio total:</td>
+                                <td>$${d.precio}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </c:forEach>
+    </h:body>
+</html>
+

@@ -8,7 +8,7 @@
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       >
-    <h:head>
+    <h:head rendered="#{CUsuario.soloVisibleParaAdmin(true)}">
         <ui:include src="/menu.xhtml"/>
         <style>
             .button {
@@ -88,10 +88,12 @@
                                                         </tr>
                                                         <tr>
                                                             <td>Compras:</td>                                                        
-                                                            <form method="post" action="info_usuario.jsp">
+                                                            <h:form>
                                                                 <input type="hidden" name="id" value="${usr.id}"/>
-                                                                <td><button type="submit" class="button" formaction="compras.jsp">Ver</button></td>
-                                                            </form>
+                                                                <td>
+                                                                    <h:commandButton action="#{CUsuario.prepararCompras()}" styleClass="button" value="Ver"/>
+                                                                </td>
+                                                            </h:form>
                                                         </tr>
                                                     </ui:fragment>
                                                 </tbody>

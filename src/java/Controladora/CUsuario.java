@@ -10,8 +10,10 @@ import Exceptions.AdminClienteException;
 import Exceptions.NoException;
 import Exceptions.loginException;
 import Modelo.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -102,6 +104,27 @@ public class CUsuario {
         dUsr.update(usr);
 
         return "AdminUsr";
+    }
+
+    public String prepararCompras() {
+
+        String rta = "error";
+
+        Usuario usr;
+
+        if (!requestParams.isEmpty()) {
+            if ((usr = (Usuario) session.getAttribute("usuario")).getClass().equals(Administrador.class)) { //Si el usuario logueado es administrador, me interesa usr0, de lo contrario me interesa el mismo usuario
+                int id = Integer.parseInt(requestParams.get("id"));
+                usr = dUsr.read(id);
+            }
+            
+            Set<Compra> compras = ((Cliente) usr).getCompras();
+            session.setAttribute("compras", new ArrayList<>(compras));
+
+            rta = "compras";
+        }
+        
+        return rta;
     }
 
 //************************************************************************************

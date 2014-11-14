@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    <h:head rendered="#{CUsuario.soloVisibleParaAdmin(true)}">
+        <ui:include src="/menu.xhtml"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Compras</title>
+        <style>
+            .button {
+                background:none!important;
+                border:none; 
+                padding:0!important;
+                /*border is optional*/
+                border-bottom:1px solid #444; 
+                color: blue;
+                border-bottom-color: blue;
+            }
+        </style>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </h:head>
+    <h:body>
+        <div style="width: 321px; margin-left: auto; margin-right: auto;">
+            <button onclick="goBack()">Ir atrás</button>
+        </div>
+        <br/>
+        <div style="width: 321px; margin-left: auto; margin-right: auto;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+
+                        <th>Total</th>
+
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ui:repeat value="${compras}" var="c">
+                        <h:form>
+                            <tr>
+                                <td>${c.fecha}</td>
+                                <td>
+                                    <h:inputHidden id="idCompra" value="#{c.id}" />
+                                    <h:commandButton action="${cCompra.prepararDetalle()}" styleClass="button" value="$${c.total}"/>                                    
+                                </td>
+                                <td><ui:fragment rendered="#{c.procesado}">Procesado</ui:fragment><ui:fragment rendered="#{!c.procesado}">En espera</ui:fragment></td>
+                            </tr>
+                        </h:form>
+                    </ui:repeat>
+                </tbody>
+            </table>
+        </div>
+    </h:body>
+</html>
+

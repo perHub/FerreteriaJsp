@@ -6,6 +6,8 @@
 package Modelo;
 
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +19,8 @@ import javax.persistence.Table;
  *
  * @author Peri
  */
+@ManagedBean
+@SessionScoped
 @Entity
 @Table(name = "detalles")
 public class Detalle implements Serializable {

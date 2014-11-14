@@ -22,6 +22,16 @@
             <from-outcome>EditUsr</from-outcome>
             <to-view-id>/info_usuario.xhtml</to-view-id>
         </navigation-case>  
+        
+        <navigation-case>
+            <from-outcome>compras</from-outcome>
+            <to-view-id>/compras.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>detalles</from-outcome>
+            <to-view-id>/detalles_de_compra.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>  
     
     <managed-bean>
@@ -29,4 +39,5 @@
         <managed-bean-class>Modelo.Cliente</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean> 
+ 
 </faces-config>
