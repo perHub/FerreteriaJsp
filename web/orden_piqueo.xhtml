@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    <h:head rendered="#{CUsuario.soloVisibleParaAdmin(true)}">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <ui:include src="/menu.xhtml"/>
+        <title>Pedidos procesados</title>
+        <style>
+            .button {
+                background:none!important;
+                border:none; 
+                padding:0!important;
+                /*border is optional*/
+                border-bottom:1px solid #444; 
+                color: blue;
+                border-bottom-color: blue;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <!-- Simple Invoice - START -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="text-center">
+                            <i class="fa fa-search-plus pull-left icon"></i>
+                            <h2>Orden número #000${idPedido}</h2>
+                        </div>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="text-center"><strong>Orden de piqueo</strong></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-condensed">
+                                                <thead>
+                                                    <tr>
+                                                        <td><strong>Producto</strong></td>
+                                                        <td class="text-center">
+                                                            <strong>Cantidad</strong></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${prodsPick.entrySet()}" var="p">
+                                                        <tr>
+                                                            <td>${p.key.getNombre()}</td>
+                                                            <td class="text-center">${p.getValue()}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin: auto; position:relative; top:25%; width: 10%;">
+                        <button onclick="window.print();" class="btn btn-primary btn-lg" role="button">Imprimir</button>
+                    </div>
+
+                    <style>
+                        .height {
+                            min-height: 200px;
+                        }
+
+                        .icon {
+                            font-size: 47px;
+                            color: #5CB85C;
+                        }
+
+                        .iconbig {
+                            font-size: 77px;
+                            color: #5CB85C;
+                        }
+
+                        .table > tbody > tr > .emptyrow {
+                            border-top: none;
+                        }
+
+                        .table > thead > tr > .emptyrow {
+                            border-bottom: none;
+                        }
+
+                        .table > tbody > tr > .highrow {
+                            border-top: 3px solid;
+                        }
+                    </style> <!-- Simple Invoice - END -->
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

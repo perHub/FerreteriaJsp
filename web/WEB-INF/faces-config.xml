@@ -32,6 +32,26 @@
             <from-outcome>detalles</from-outcome>
             <to-view-id>/detalles_de_compra.xhtml</to-view-id>
         </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>EditProd</from-outcome>
+            <to-view-id>/info_producto.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>productos</from-outcome>
+            <to-view-id>/admin_productos.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>procesados</from-outcome>
+            <to-view-id>/pedidos_procesados.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>piqueo</from-outcome>
+            <to-view-id>/orden_piqueo.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>  
     
     <managed-bean>

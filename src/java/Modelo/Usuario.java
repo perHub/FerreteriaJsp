@@ -127,7 +127,7 @@ public class Usuario {
     }
 
     public Boolean esAdmin() throws Exception {
-        throw new Exception("Error no especificado procesando al usuario.");
+        throw new IllegalStateException("Error no especificado con el usuario");
     }
 
     @Override

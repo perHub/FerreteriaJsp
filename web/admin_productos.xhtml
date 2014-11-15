@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    <h:head rendered="#{CUsuario.soloVisibleParaAdmin(true)}">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <ui:include src="/menu.xhtml"/>
+        <title>Productos cargados</title>
+    </h:head>
+    <h:body>
+        <h1 align="center">Productos</h1>
+
+        <c:forEach items="${CProducto.all}" var="prod">
+            <div id="lProd" class="panel panel-default" style="width: 400px; margin-left: auto; margin-right: auto;">
+                <table class="table table-bordered">
+                    <tr>
+                        <td style="width: 319px">Prducto:</td>
+                        <td>${prod.nombre}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 319px">Precio:</td>
+                        <td>$${prod.precio}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 319px">Stock:</td>
+                        <td>${prod.stock}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 319px">Estado:</td>
+                        <td>
+                            <c:choose><c:when test="${prod.activo}">Activo</c:when><c:otherwise>Inactivo</c:otherwise></c:choose>
+                        </td>
+
+                    </tr>
+                </table>
+                <h:form>
+                    <input type="hidden" name="id" value="${prod.id}"/>
+
+                    <div style="margin: auto; position:relative; width: 10%;">
+                        <h:commandButton action="#{CProducto.prepararProducto()}" value="Editar"/>
+                    </div>
+
+                </h:form>
+            </div>
+        </c:forEach>
+    </h:body>
+</html>
+

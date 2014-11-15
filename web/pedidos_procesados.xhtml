@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    <h:head rendered="#{CUsuario.soloVisibleParaAdmin(true)}">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <ui:include src="/menu.xhtml"/>
+        <title>Pedidos procesados</title>
+        <style>
+            .button {
+                background:none!important;
+                border:none; 
+                padding:0!important;
+                /*border is optional*/
+                border-bottom:1px solid #444; 
+                color: blue;
+                border-bottom-color: blue;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="panel panel-default center-block" style="width: 700px;">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Compras procesadas</div>
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Número de orden</th>
+                        <th>Total</th>
+                        <th>Usuario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${cCompra.procesados}" var="p">
+                        <h:form>
+                            <input name="pedido" type="hidden" value="${p.pedido.getId()}"/>
+                            <tr>
+                                <td>${p.fecha}</td>
+                                <td><h:commandButton styleClass="button" action="#{cPedido.ordenPiqueo()}" value="00${p.pedido.getId()}" /></td>
+                                <td>$${p.total}</td>
+                                <td>${p.cliente.getNombre()}</td>
+                            </tr>
+                        </h:form>
+                    </c:forEach>                    
+                </tbody>
+            </table>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    <h:head rendered="#{CUsuario.soloVisibleParaAdmin(true)}">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <ui:include src="/menu.xhtml"/>
+        #{CProducto.clearProd()}
+        <title>Edite o de de alta un producto</title>
+        <style>
+            .span3 {
+                width: 170px;
+            }
+            .span4 {
+                width: 50px;
+            }
+
+        </style>
+        <script>
+            function check() {
+                return document.getElementById("myCheck").checked;
+            }
+        </script>
+    </h:head>
+    <h:body>
+        <div class="span3 center-block">
+            <h2>Agregar/Modificar producto</h2>
+            <h:form>
+                <label>Nombre:</label>
+                <h:inputText 
+                    id="nombre" 
+                    styleClass="span3"
+                    value="#{producto.nombre}"
+                    required="true" 
+                    requiredMessage="Debe ingresar un nombre de producto"
+                    />
+                <label>Precio</label>
+                <h:inputText id="precio" validatorMessage="El precio debe ser un número"
+                             styleClass="span3"
+                             value="#{producto.precio}"
+                             required="true" 
+                             requiredMessage="Debe ingresar el precio"
+                             p:type="number"
+                             p:min="0.05" 
+                             p:step="0.05"
+                             >
+                    <f:convertNumber pattern="###.###" maxFractionDigits="2"/>
+                </h:inputText>
+                <label>Stock</label>
+                <h:inputText id="stock" validatorMessage="El stock debe ser un numero"
+                             styleClass="span3"
+                             value="#{producto.stock}"
+                             required="true" 
+                             requiredMessage="Debe ingresar el stock"
+                             p:type="number"
+                             p:min="1"
+
+                             >
+                    <f:convertNumber integerOnly="true" pattern="###.###"/>
+                </h:inputText>
+                <label><h:selectBooleanCheckbox value="#{producto.activo}" /> Activo</label>
+                <h:inputHidden value="#{producto.id}"/><br/>
+                <h:commandButton action="#{CProducto.saveProd()}" styleClass="btn btn-primary pull-right" value="Actualizar"/>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+
