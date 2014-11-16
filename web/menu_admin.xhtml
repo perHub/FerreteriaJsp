@@ -10,6 +10,13 @@
             xmlns:h="http://java.sun.com/jsf/html"
             xmlns:ui="http://java.sun.com/jsf/facelets"
             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+            <script type="text/javascript">
+                function logout()
+                {
+                    document.getElementById("formLogout:btnLogout").click();
+                }
+
+            </script>
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -55,7 +62,10 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>${usuario.getUsername()} </b> <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="Logout">Logout</a></li>
+                                    <li><a onclick="logout()" href="#">Logout</a></li>
+                                    <h:form id="formLogout">
+                                        <h:commandLink id="btnLogout" action="#{CUsuario.logout()}"/>
+                                    </h:form>
                                 </ul>
                             </li>
                         </ul>

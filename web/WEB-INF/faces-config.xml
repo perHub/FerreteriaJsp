@@ -7,6 +7,12 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    
+    <factory>
+        <exception-handler-factory>
+            Exceptions.CustomExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>
     <navigation-rule>   
         <navigation-case>
             <from-outcome>AdminUsr</from-outcome>
@@ -16,6 +22,11 @@
         <navigation-case>
             <from-outcome>ClienteLoggedIn</from-outcome>
             <to-view-id>main.jsp</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
         
         <navigation-case>

@@ -82,6 +82,11 @@ public class CUsuario {
         }
         return rtr;
     }
+    
+    public String logout(){
+        session.invalidate();
+        return "index";
+    }
 
     public String cargarUsuarioParaEdicion() throws Exception {
 
