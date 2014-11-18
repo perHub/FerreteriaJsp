@@ -14,12 +14,12 @@
             <link href="dist/css/signin.css" rel="stylesheet"/>
             <script src="dist/js/jquery.min.js"></script>
             <script src="dist/js/bootstrap.min.js"></script>
-            <c:choose>
-                <c:when test="${usuario.esAdmin()}">
+            <ui:fragment rendered="${usuario.esAdmin()}">
                     <ui:include src="/menu_admin.xhtml"/>
-                </c:when>
-            </c:choose>
-
+            </ui:fragment>
+            <ui:fragment rendered="${!usuario.esAdmin()}">
+                    <ui:include src="/menu_cliente.xhtml"/>
+            </ui:fragment>
         </ui:composition>
     </h:head>
 

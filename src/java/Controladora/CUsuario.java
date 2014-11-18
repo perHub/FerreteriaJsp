@@ -82,8 +82,8 @@ public class CUsuario {
         }
         return rtr;
     }
-    
-    public String logout(){
+
+    public String logout() {
         session.invalidate();
         return "index";
     }
@@ -111,25 +111,28 @@ public class CUsuario {
         return "AdminUsr";
     }
 
-    public String prepararCompras() {
+    public String prepararCompras() throws Exception {
+        
 
-        String rta = "error";
+        Usuario usr = (Usuario) session.getAttribute("usuario");
 
-        Usuario usr;
-
-        if (!requestParams.isEmpty()) {
-            if ((usr = (Usuario) session.getAttribute("usuario")).getClass().equals(Administrador.class)) { //Si el usuario logueado es administrador, me interesa usr0, de lo contrario me interesa el mismo usuario
+        if (!requestParams.isEmpty() && usr.esAdmin()) { //Si el usuario logueado es administrador, me interesa usr0, de lo contrario me interesa el mismo usuario
                 int id = Integer.parseInt(requestParams.get("id"));
                 usr = dUsr.read(id);
+                return "compras";
             }
-            
-            Set<Compra> compras = ((Cliente) usr).getCompras();
-            session.setAttribute("compras", new ArrayList<>(compras));
-
-            rta = "compras";
-        }
         
-        return rta;
+        if(usr.esAdmin())   //Si un admin llega hasta este punto, no se le debe permitir continuar ya que no posse los datos necesarios
+            throw new NoException();
+       
+        Set<Compra> compras = ((Cliente) usr).getCompras();
+        if(compras.isEmpty())
+            throw new Exception("Usted no posee compras!");
+        
+        session.setAttribute("compras", new ArrayList<>(compras));
+
+        return null;
+
     }
 
 //************************************************************************************

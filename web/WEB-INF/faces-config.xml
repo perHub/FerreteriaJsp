@@ -21,7 +21,7 @@
     
         <navigation-case>
             <from-outcome>ClienteLoggedIn</from-outcome>
-            <to-view-id>main.jsp</to-view-id>
+            <to-view-id>main.xhtml</to-view-id>
         </navigation-case>
         
         <navigation-case>

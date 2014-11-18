@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    <h:head rendered="${CUsuario.soloVisibleParaAdmin(false)}">
+        <title>Lista de productos</title>
+        <ui:include src="/menu.xhtml"/>
+    </h:head>
+    <h:body>
+        <h1 align="center">Lista de productos</h1>
+
+        <div class="panel panel-default"/>
+        <!-- Default panel contents -->
+        <div class="panel-heading center-block">Productos</div>
+
+        <c:forEach items="${CProducto.all}" var="prod">
+            <div id="lProd" align="center" class="panel panel-default">
+                <table class="table table-bordered">
+                    <tr>
+                        <td style="width: 319px">Prducto:</td>
+                        <td>${prod.nombre}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 319px">Precio:</td>
+                        <td>$${prod.precio}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 319px">Stock:</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${prod.stock != 0}">
+                                    ${prod.stock}
+                                </c:when>
+                                <c:otherwise>
+                                    <label style="color: red"> Sin stock</label>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+                </table>
+                <c:choose>
+                    <c:when test="${prod.stock != 0}">
+                        <div class="auto-style1" style="width: 322px; height: 27px; padding-bottom: 50px">
+                            Cantidad:
+                            <h:form>
+                                <input type="number" name="cantidad"  required="true" value="1" min="1" max="${prod.stock}" style="width: 60px;"/>
+                                <input type="hidden" name="prodId" value="${prod.id}"/>
+                                <h:commandButton action="#{cCompra.agregarAlCarrito()}" value="Agregar al carrito" />&nbsp;
+                            </h:form>
+                            <br />
+                            <br />
+                        </div>
+                    </c:when>
+                </c:choose>
+            </div>
+        </c:forEach>
+    </h:body>
+</html>
+

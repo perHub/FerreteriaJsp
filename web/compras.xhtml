@@ -7,9 +7,10 @@
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       >
-    <h:head rendered="#{CUsuario.soloVisibleParaAdmin(true)}">
+    <h:head rendered="#{CUsuario.usuarioEstaLogueado()}">
         <ui:include src="/menu.xhtml"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        #{CUsuario.prepararCompras()}
         <title>Compras</title>
         <style>
             .button {

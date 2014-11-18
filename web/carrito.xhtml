@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    <h:head rendered="${CUsuario.soloVisibleParaAdmin(false)}">
+        #{cCompra.carritoVacioCheck()}
+        <title>Carrito</title>
+        <ui:include src="/menu.xhtml"/>
+    </h:head>
+    <h:body>
+        <c:forEach items="${carrito.detalles}" var="d">
+                <div id="carrito" align="center">
+                    <table class="table-bordered">
+                           <tr>
+                            <td style="width: 319px">Prducto:</td>
+                            <td>${d.getProducto().getNombre()}</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 319px">Cantidad:</td>
+                            <td>${d.getCantidad()}</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 319px">Precio unitario:</td>
+                            <td>$ ${d.getProducto().getPrecio()}</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 319px">Precio total:</td>
+                            <td>$ ${d.getPrecio()}</td>
+                        </tr>
+                    </table>
+                    <h:form>
+                    <input type="hidden" name="detId" value="${d.getId()}" />
+                    <div class="botonR" style="width: 148px">
+                        <h:commandButton action="#{cCompra.quitarDelCarrito()}" value="Quitar del carrito" />
+                    </div>
+                    </h:form>
+                </div>
+            <br/>
+        </c:forEach>
+
+        <div align="center">
+            <br/>
+            <form name="confirmar" method="post" action="confirmarCompra">
+                <div class="botonConf">
+                    Total de compras: $${carrito.total}
+                    <input name="Button2" type="submit" value="Confirmar compras" />
+                </div>
+            </form>
+        </div>
+    </h:body>
+</html>
+

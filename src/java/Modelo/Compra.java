@@ -18,10 +18,10 @@ import javax.persistence.*;
  *
  * @author Peri
  */
-
+@ManagedBean(name = "carrito")
+@SessionScoped
 @Entity
 @Table(name = "compras")
-
 public class Compra implements Serializable {
 
     private int id;

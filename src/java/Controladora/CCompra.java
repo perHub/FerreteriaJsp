@@ -7,16 +7,23 @@ package Controladora;
 
 import DAO.DAOCompra;
 import DAO.DAOPedido;
+import DAO.DAOProducto;
 import Exceptions.NoException;
 import Modelo.CantidadInsuficienteException;
+import Modelo.Cliente;
 import Modelo.Compra;
 import Modelo.Detalle;
 import Modelo.Pedido;
 import Modelo.Producto;
+import Modelo.Usuario;
 import com.sun.faces.context.RequestParameterMap;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import javassist.NotFoundException;
+import javax.faces.application.ConfigurableNavigationHandler;
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -31,6 +38,7 @@ import javax.servlet.http.HttpSession;
 @RequestScoped
 public class CCompra {
 
+    FacesContext fc = FacesContext.getCurrentInstance();
     HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
     Map<String, String> requestParams = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
     HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -105,5 +113,51 @@ public class CCompra {
         dP.create(p); //Persisto
 
         return "procesados";
+    }
+
+    public void agregarAlCarrito() throws CantidadInsuficienteException {
+        DAOProducto dP = new DAOProducto();
+
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        int prodId = Integer.parseInt(request.getParameter("prodId"));
+        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+        Producto p = dP.read(prodId);
+
+        Compra c = (Compra) session.getAttribute("carrito");
+
+        if (c == null) {
+            session.setAttribute("carrito", (c = new Compra(new Date(), new Detalle(p, cantidad), (Cliente) usuario)));
+            session.setAttribute("itemCount", c.getDetalles().size());
+        } else {
+            if (c.agregarDetalle(new Detalle(p, cantidad))) {
+                session.setAttribute("itemCount", c.getDetalles().size());
+            }
+        }
+
+    }
+
+    public void carritoVacioCheck() throws IOException {
+        Compra c = (Compra) session.getAttribute("carrito");
+//        ConfigurableNavigationHandler CNH = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+
+        if (c.getDetalles().isEmpty()) {
+            fc.getExternalContext().redirect("main.xhtml");
+            fc.responseComplete();
+        }
+    }
+
+    public String quitarDelCarrito() throws NotFoundException {
+        Compra c = (Compra) session.getAttribute("carrito");
+
+        int detId = Integer.parseInt(request.getParameter("detId"));
+
+        c.eliminarDetalle(detId);
+        session.setAttribute("itemCount", c.getDetalles().size());
+        if (c.getDetalles().isEmpty()) {
+            session.setAttribute("carrito", null);
+            return "ClienteLoggedIn";
+        }
+
+        return null;
     }
 }

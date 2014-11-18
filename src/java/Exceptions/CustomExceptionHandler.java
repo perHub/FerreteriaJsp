@@ -48,7 +48,13 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
                     = (ExceptionQueuedEventContext) event.getSource();
 
             // get the exception from context
-            Throwable t = ExceptionUtils.getRootCause(context.getException());
+            Throwable t;
+            if ((t = ExceptionUtils.getRootCause(context.getException())) == null) {
+                t = context.getException();
+            }
+            if (t == null) {
+                t = new Exception("Imposible procesar la excepción.");
+            }
 
             final FacesContext fc = FacesContext.getCurrentInstance();
             final Map<String, Object> requestMap = fc.getExternalContext().getRequestMap();
@@ -56,35 +62,35 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
 
             //here you do what ever you want with exception
             //log error ?
-                log.log(Level.SEVERE, "Critical Exception!", t);
+            log.log(Level.SEVERE, "Critical Exception!", t);
 
-                //redirect error page
-                HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
-                HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
+            //redirect error page
+            HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
+            HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
 
-                String error = t.getMessage();
-                String fwd = "/faces/error.xhtml";
-                
-                if (t.getClass().equals(IllegalStateException.class)) {
-                    fwd = "faces/index.xhtml";
-                }
-                requestMap.put("error", error);
+            String error = t.getMessage();
+            String fwd = "/faces/error.xhtml";
+
+            if (t.getClass().equals(IllegalStateException.class)) {
+                fwd = "faces/index.xhtml";
+            }
+            requestMap.put("error", error);
 //                session.setAttribute("error", t.getMessage());
 //                nav.handleNavigation(fc, null, "/error");
 
-                RequestDispatcher rd = request.getRequestDispatcher(fwd);
+            RequestDispatcher rd = request.getRequestDispatcher(fwd);
 //               fc.renderResponse();
-                try {
-                    rd.forward(request, response);
+            try {
+                rd.forward(request, response);
 
                         // remove the comment below if you want to report the error in a jsf error message
-                    //JsfUtil.addErrorMessage(t.getMessage());
-                } catch (ServletException | IOException ex) {
-                    Logger.getLogger(CustomExceptionHandler.class.getName()).log(Level.SEVERE, null, ex);
-                } finally {
-                    //remove it from queue
-                    i.remove();
-                }
+                //JsfUtil.addErrorMessage(t.getMessage());
+            } catch (ServletException | IOException ex) {
+                Logger.getLogger(CustomExceptionHandler.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                //remove it from queue
+                i.remove();
+            }
             //parent hanle
             getWrapped().handle();
         }
