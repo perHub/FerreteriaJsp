@@ -10,7 +10,9 @@
     <h:head rendered="#{CUsuario.usuarioEstaLogueado()}">
         <ui:include src="/menu.xhtml"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        #{CUsuario.prepararCompras()}
+        <c:if test="#{!usuario.esAdmin()}">
+            #{CUsuario.prepararCompras()}
+        </c:if>
         <title>Compras</title>
         <style>
             .button {

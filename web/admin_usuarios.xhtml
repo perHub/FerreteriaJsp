@@ -87,13 +87,18 @@
                                                             <td>${usr.direccion}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Compras:</td>                                                        
-                                                            <h:form>
-                                                                <input type="hidden" name="id" value="${usr.id}"/>
-                                                                <td>
-                                                                    <h:commandButton action="#{CUsuario.prepararCompras()}" styleClass="button" value="Ver"/>
-                                                                </td>
-                                                            </h:form>
+                                                            <td>Compras:</td>
+                                                            <ui:fragment rendered="#{usr.getCompras().isEmpty()}">
+                                                                <td><label style="color: red">Sin compras</label></td>
+                                                            </ui:fragment>
+                                                            <ui:fragment rendered="#{!usr.getCompras().isEmpty()}">
+                                                                <h:form>
+                                                                    <input type="hidden" name="id" value="${usr.id}"/>
+                                                                    <td>
+                                                                        <h:commandButton action="#{CUsuario.prepararCompras()}" styleClass="button" value="Ver"/>
+                                                                    </td>
+                                                                </h:form>
+                                                            </ui:fragment>
                                                         </tr>
                                                     </ui:fragment>
                                                 </tbody>

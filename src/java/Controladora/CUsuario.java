@@ -60,14 +60,14 @@ public class CUsuario {
 //**********************************************************
 //Los siguientes métodos ayudan a las relgas de navegación:
 //**********************************************************
-    public String login() throws NoException {
+    public String login() throws NoException, Exception {
 //        return dUsr.login(username, password);
         String rtr = "";
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         if ((usuario = (dUsr.login(usuario.getUsername(), usuario.getPassword()))) != null) {
 
             session.setAttribute("usuario", usuario);
-
+            
             if (!usuario.isActivo()) {
                 throw new NoException("Usuario inactivo.");
             }
@@ -80,6 +80,8 @@ public class CUsuario {
             }
 
         }
+        else
+            throw new Exception("Usuario o contraseña incorrecta");
         return rtr;
     }
 
@@ -94,8 +96,9 @@ public class CUsuario {
         if (!requestParams.isEmpty()) {
             int usrId = Integer.parseInt(requestParams.get("usrId"));
             usr = dUsr.read(usrId);
-
+            
             session.setAttribute("usr0", usr);
+            
 
             return "EditUsr";
         }
@@ -113,17 +116,16 @@ public class CUsuario {
 
     public String prepararCompras() throws Exception {
         
+        String str = null;
 
         Usuario usr = (Usuario) session.getAttribute("usuario");
 
-        if (!requestParams.isEmpty() && usr.esAdmin()) { //Si el usuario logueado es administrador, me interesa usr0, de lo contrario me interesa el mismo usuario
+        if (usr.esAdmin()) { //Si el usuario logueado es administrador, me interesa usr0, de lo contrario me interesa el mismo usuario
                 int id = Integer.parseInt(requestParams.get("id"));
                 usr = dUsr.read(id);
-                return "compras";
+                str = "compras";
             }
-        
-        if(usr.esAdmin())   //Si un admin llega hasta este punto, no se le debe permitir continuar ya que no posse los datos necesarios
-            throw new NoException();
+     
        
         Set<Compra> compras = ((Cliente) usr).getCompras();
         if(compras.isEmpty())
@@ -131,10 +133,34 @@ public class CUsuario {
         
         session.setAttribute("compras", new ArrayList<>(compras));
 
-        return null;
+        return str;
 
     }
+    
+     public String confirmarCompras() throws Exception {
 
+        Cliente cl = (Cliente) session.getAttribute("usuario");
+        Compra c = (Compra) session.getAttribute("carrito");
+        Set<Detalle> detalles = c.getDetalles();
+
+        if (detalles.isEmpty()) {
+            throw new Exception("No es posible realizar la operación.");
+        }
+
+        for (Detalle d : detalles) { //Limpio los IDs para poder persistirlos.
+            d.setId(0);
+        }
+        cl.agregarCompra(c);
+
+        dUsr.update(cl);
+
+        session.setAttribute("carrito", null);
+        session.setAttribute("itemCount", null);
+        
+        return "ClienteLoggedIn";
+
+    }
+    
 //************************************************************************************
 //Los siguientes métodos realizan tareas no relacionadas con las reglas de navegacion:
 //************************************************************************************

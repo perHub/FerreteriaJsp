@@ -13,39 +13,44 @@
         <title>Compras pendientes</title>
     </h:head>
     <h:body>
-        <div class="panel panel-default center-block" style="width: 700px;">
-            <!-- Default panel contents -->
-            <div class="panel-heading">Pedidos pendientes</div>
+        <ui:fragment rendered="${cCompra.pendientes.isEmpty()}">
+            ¡No hay compras pendientes!
+        </ui:fragment>
+        <ui:fragment rendered="${!cCompra.pendientes.isEmpty()}">
+            <div class="panel panel-default center-block" style="width: 700px;">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Pedidos pendientes</div>
 
-            <!-- Table -->
-            <h:form>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Procesar</th>
-                            <th>Fecha</th>
-                            <th>Total</th>
-                            <th>Usuario</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ui:repeat value="${cCompra.pendientes}" var="p">
+                <!-- Table -->
+                <h:form>
+                    <table class="table table-bordered">
+                        <thead>
                             <tr>
-                                <td>
-                                    <input type="checkbox" name="${p.id}"/>
-                                </td>
-                                <td>${p.fecha}</td>
-                                <td>$${p.total}</td>
-                                <td>${p.cliente.getNombre()}</td>
+                                <th>Procesar</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Usuario</th>
                             </tr>
-                        </ui:repeat>                    
-                    </tbody>
-                </table>
-                <div style="margin: auto; position:relative; top:25%; width: 20%;">
-                    <h:commandButton action="#{cCompra.procesarPedidos()}" value="Procesar pedidos" styleClass="btn btn-primary btn-lg"/>
-                </div>
-            </h:form>
-        </div>
+                        </thead>
+                        <tbody>
+                            <ui:repeat value="${cCompra.pendientes}" var="p">
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="${p.id}"/>
+                                    </td>
+                                    <td>${p.fecha}</td>
+                                    <td>$${p.total}</td>
+                                    <td>${p.cliente.getNombre()}</td>
+                                </tr>
+                            </ui:repeat>                    
+                        </tbody>
+                    </table>
+                    <div style="margin: auto; position:relative; top:25%; width: 20%;">
+                        <h:commandButton action="#{cCompra.procesarPedidos()}" value="Procesar pedidos" styleClass="btn btn-primary btn-lg"/>
+                    </div>
+                </h:form>
+            </div>
+        </ui:fragment>
     </h:body>
 </html>
 

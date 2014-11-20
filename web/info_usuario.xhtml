@@ -75,31 +75,17 @@
                         </div>
                     </div>
 
-                    <div class="control-group">
-                        <label class="control-label" for="password">Password</label>
-                        <div class="controls">
-                            <h:inputSecret id="password" validatorMessage="El password debe estar compuesto de al menos 8 caracteres"
-                                           value="#{usr0.password}"
-                                           p:placeholder="Mín. 8 caracteres"
-                                           required="true" 
-                                           requiredMessage="Debe ingresar una contraseña"
-                                           >
-                                <f:validateLength minimum="8"/>
-                            </h:inputSecret>
-
-                        </div>
-                    </div>
-
                     <!--Datos especìficos del cliente.-->
 
                     <div class="control-group">
                         <label class="control-label" for="dni">DNI</label>
                         <div class="controls">
-                            <h:inputText id="dni" validatorMessage="El dni debe ser un número"
+                            <h:inputText id="dni"
                                          value="#{usr0.dni}"
                                          p:placeholder="Ej: 112223333"
                                          required="true" 
                                          requiredMessage="Debe ingresar el número de documento"
+                                         validatorMessage="El dni debe ser un número"
                                          >
                                 <f:convertNumber integerOnly="true" type="number" />
                             </h:inputText>
@@ -121,12 +107,14 @@
                     <div class="control-group">
                         <label class="control-label" for="telefono">Teléfono</label>
                         <div class="controls">
-                             <h:inputText id="telefono" 
+                            <h:inputText id="telefono"
                                          value="#{usr0.telefono}"
                                          p:placeholder="Ej: 4801111"
                                          required="true" 
                                          requiredMessage="Debe ingresar un teléfono"
-                                         />
+                                         validatorMessage="El teléfono debe ser un número">
+                                <f:convertNumber integerOnly="true" type="number" />
+                            </h:inputText>
                         </div>
                     </div>
                     <h:selectBooleanCheckbox value="#{usr0.activo}"/>
@@ -134,7 +122,13 @@
                     <div class="control-group">
                         <div class="controls"><br/>
                             <h:commandButton action="#{CUsuario.saveUsr()}" styleClass="btn btn-success" value="Crear/Actualizar"></h:commandButton>
-                        </div><br/>                   
+                        </div><br/>  
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <a href="changepwd.xhtml">Cambiar contraseña</a>
+                            </div>
+                        </div>
                     </div>
                     <h:messages style="Color: red"/>
                 </h:form>

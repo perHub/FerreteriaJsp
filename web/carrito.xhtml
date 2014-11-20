@@ -45,12 +45,12 @@
 
         <div align="center">
             <br/>
-            <form name="confirmar" method="post" action="confirmarCompra">
+            <h:form>
                 <div class="botonConf">
                     Total de compras: $${carrito.total}
-                    <input name="Button2" type="submit" value="Confirmar compras" />
+                    <h:commandButton action="#{CUsuario.confirmarCompras()}" value="Confirmar compras" />
                 </div>
-            </form>
+            </h:form>
         </div>
     </h:body>
 </html>
