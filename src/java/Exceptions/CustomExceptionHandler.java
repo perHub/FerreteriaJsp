@@ -5,6 +5,7 @@
  */
 package Exceptions;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
@@ -74,6 +75,9 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
             if (t.getClass().equals(IllegalStateException.class)) {
                 fwd = "faces/index.xhtml";
             }
+            if (t.getClass().getSimpleName().equals("MySQLIntegrityConstraintViolationException")) {
+                error = "El " + t.getMessage().split("\'")[3] + " ha sido registrado por otro usuario.";
+            }
             requestMap.put("error", error);
 //                session.setAttribute("error", t.getMessage());
 //                nav.handleNavigation(fc, null, "/error");
@@ -83,7 +87,7 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
             try {
                 rd.forward(request, response);
 
-                        // remove the comment below if you want to report the error in a jsf error message
+                // remove the comment below if you want to report the error in a jsf error message
                 //JsfUtil.addErrorMessage(t.getMessage());
             } catch (ServletException | IOException ex) {
                 Logger.getLogger(CustomExceptionHandler.class.getName()).log(Level.SEVERE, null, ex);

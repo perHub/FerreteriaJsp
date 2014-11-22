@@ -74,6 +74,25 @@
                                          />
                         </div>
                     </div>
+                    <ui:fragment rendered="#{usr0.id == 0}">
+                            <div class="span6 center-block">
+                                <div class="area">
+                                    <div class="control-group">
+                                        <label class="control-label" for="password">Password</label>
+                                        <div class="controls">
+                                            <h:inputSecret id="password" validatorMessage="El password debe estar compuesto de al menos 8 caracteres"
+                                                           value="#{usr0.password}"
+                                                           p:placeholder="Mín. 8 caracteres"
+                                                           required="true" 
+                                                           requiredMessage="Debe ingresar una contraseña"
+                                                           >
+                                                <f:validateLength minimum="8"/>
+                                            </h:inputSecret>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </ui:fragment>
 
                     <!--Datos especìficos del cliente.-->
 
@@ -117,18 +136,19 @@
                             </h:inputText>
                         </div>
                     </div>
-                    <h:selectBooleanCheckbox value="#{usr0.activo}"/>
+                    <h:selectBooleanCheckbox value="#{usr0.activo}"/> Activo
                     <h:inputHidden value="#{usr0.id}"/>
                     <div class="control-group">
                         <div class="controls"><br/>
                             <h:commandButton action="#{CUsuario.saveUsr()}" styleClass="btn btn-success" value="Crear/Actualizar"></h:commandButton>
                         </div><br/>  
-
-                        <div class="control-group">
-                            <div class="controls">
-                                <a href="changepwd.xhtml">Cambiar contraseña</a>
+                        <ui:fragment rendered="#{usr0.id != 0}">
+                            <div class="control-group">
+                                <div class="controls">
+                                    <a href="changepwd.xhtml">Cambiar contraseña</a>
+                                </div>
                             </div>
-                        </div>
+                        </ui:fragment>
                     </div>
                     <h:messages style="Color: red"/>
                 </h:form>
