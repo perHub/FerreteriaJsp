@@ -72,7 +72,7 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
             String error = t.getMessage();
             String fwd = "/faces/error.xhtml";
 
-            if (t.getClass().equals(IllegalStateException.class)) {
+            if (t.getClass().equals(IllegalStateException.class) || t.getClass().equals(loginException.class)) {
                 fwd = "faces/index.xhtml";
             }
             if (t.getClass().getSimpleName().equals("MySQLIntegrityConstraintViolationException")) {
