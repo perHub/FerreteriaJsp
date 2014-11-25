@@ -85,6 +85,7 @@ public class CProducto {
         if (requestParams.isEmpty()) {
             Producto p = new Producto();
             p.setActivo(true);
+            p.setPrecio((float) 0.05);
             request.setAttribute("producto", p);
         }
     }
