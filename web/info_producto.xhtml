@@ -46,9 +46,9 @@
                              required="true" 
                              requiredMessage="Debe ingresar el precio"
                              p:type="number"
-                             p:min="0.05" 
+                             p:min="0"
                              p:step="0.05"
-                             >
+                             > <!-- Valor mínimo es 0 para evitar problemas --> 
                     <f:convertNumber pattern="###.###" maxFractionDigits="2"/>
                 </h:inputText>
                 <label>Stock</label>
@@ -58,9 +58,8 @@
                              required="true" 
                              requiredMessage="Debe ingresar el stock"
                              p:type="number"
-                             p:min="1"
-
-                             >
+                             p:min="0" 
+                             > <!-- Valor mínimo es 0 para evitar problemas --> 
                     <f:convertNumber integerOnly="true" pattern="###.###"/>
                 </h:inputText>
                 <label><h:selectBooleanCheckbox value="#{producto.activo}" /> Activo</label>
